@@ -2,6 +2,7 @@ import './css/globals.css'
 import './css/Fork-Awesome-1.2.0/css/fork-awesome.min.css';
 import './css/bootstrap.min.css';
 import { Inter } from 'next/font/google'
+import './script'
 
 export const metadata = {
   metadataBase: new URL('https://postgres-starter.vercel.app'),
