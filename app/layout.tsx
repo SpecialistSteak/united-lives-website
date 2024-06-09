@@ -1,4 +1,6 @@
-import './globals.css'
+import './css/globals.css'
+import './css/Fork-Awesome-1.2.0/css/fork-awesome.min.css';
+import './css/bootstrap.min.css';
 import { Inter } from 'next/font/google'
 
 export const metadata = {
