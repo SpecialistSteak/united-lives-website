@@ -1,6 +1,6 @@
-import './css/globals.css';
-import './css/Fork-Awesome-1.2.0/css/fork-awesome.min.css';
-import './css/bootstrap.min.css';
+import '../styles/globals.css';
+import '../styles/Fork-Awesome-1.2.0/css/fork-awesome.min.css';
+import '../styles/bootstrap.min.css';
 import { Inter } from 'next/font/google';
 import HeaderAndNavbar from '@/components/header-and-navbar';
 import './window.d.ts';

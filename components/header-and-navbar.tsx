@@ -2,6 +2,8 @@
 
 import React, { useEffect } from 'react';
 import $ from 'jquery';
+import '../styles/header-and-navbar.css';
+import SearchComponent from './search-component';
 
 const HeaderAndNavbar = () => {
   useEffect(() => {
@@ -30,15 +32,19 @@ const HeaderAndNavbar = () => {
 
     init();
 
-    // Trigger in-page search
-    window.triggerSearch = function() {
-      let searchTerm = prompt("Enter the text to search for:");
-      if (searchTerm) {
-        if (!window.find(searchTerm)) {
-          alert("No matches found.");
-        }
-      }
-    }
+        // Define triggerSearch only if window is available
+        if (typeof window !== 'undefined') {
+            // Trigger in-page search
+            window.triggerSearch = function() {
+              let searchTerm = prompt("Enter the text to search for:");
+              if (searchTerm) {
+                if (!window.find(searchTerm)) {
+                  alert("No matches found.");
+                }
+              }
+            }
+          }
+      
 
   }, []);
 
@@ -46,20 +52,20 @@ const HeaderAndNavbar = () => {
         <><div className="top-bar">
             <nav>
                 <ul>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Support Us</a></li>
-                    <li><a href="#">Donate</a></li>
+                    <li><a href="#" className="navbar-href">Contact Us</a></li>
+                    <li><a href="#" className="navbar-href">Support Us</a></li>
+                    <li><a href="#" className="navbar-href">Donate</a></li>
                 </ul>
             </nav>
             <div className="social-icons">
-                <a href="#" className="icon-facebook"></a>
-                <a href="#" className="icon-twitter"></a>
-                <a href="#" className="icon-instagram"></a>
-                <a href="#" className="icon-youtube"></a>
+                <a href="#" className="navbar-href icon-facebook"></a>
+                <a href="#" className="navbar-href icon-twitter"></a>
+                <a href="#" className="navbar-href icon-instagram"></a>
+                <a href="#" className="navbar-href icon-youtube"></a>
             </div>
         </div><div className="main-bar">
                 <div className="logo">
-                    <a href="#">
+                    <a href="#" className="navbar-href">
                         <img src="./united-lives-new-logo-with-text-cropped-minimized-white.svg" alt="United Lives" />
                     </a>
                 </div>
@@ -68,109 +74,97 @@ const HeaderAndNavbar = () => {
                 </div>
             </div><nav className="main-nav">
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="#" className="navbar-href">Home</a></li>
                     <li>
-                        <a href="#">About Us</a>
+                        <a href="#" className="navbar-href">About Us</a>
                         <ul>
                             <li>
-                                <a href="#">Our Vision</a>
+                                <a href="#" className="navbar-href">Our Vision</a>
                                 <ul>
-                                    <li><a href="#">Education & Literacy</a></li>
-                                    <li><a href="#">Health & Family Welfare</a></li>
-                                    <li><a href="#">Food Processing</a></li>
-                                    <li><a href="#">Community Development</a></li>
-                                    <li><a href="#">Tamil Nadu Initiatives</a></li>
+                                    <li><a href="#" className="navbar-href">Education & Literacy</a></li>
+                                    <li><a href="#" className="navbar-href">Health & Family Welfare</a></li>
+                                    <li><a href="#" className="navbar-href">Food Processing</a></li>
+                                    <li><a href="#" className="navbar-href">Community Development</a></li>
+                                    <li><a href="#" className="navbar-href">Tamil Nadu Initiatives</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">About United Lives</a>
+                                <a href="#" className="navbar-href">About United Lives</a>
                                 <ul>
-                                    <li><a href="#">Our Team</a></li>
-                                    <li><a href="#">Our Trustees</a></li>
-                                    <li><a href="#">Our Partners</a></li>
-                                    <li><a href="#">Our History</a></li>
-                                    <li><a href="#">Frequently Asked Questions</a></li>
-                                    <li><a href="#">Support Us</a></li>
-                                    <li><a href="#">Volunteer with Us</a></li>
+                                    <li><a href="#" className="navbar-href">Our Team</a></li>
+                                    <li><a href="#" className="navbar-href">Our Trustees</a></li>
+                                    <li><a href="#" className="navbar-href">Our Partners</a></li>
+                                    <li><a href="#" className="navbar-href">Our History</a></li>
+                                    <li><a href="#" className="navbar-href">Frequently Asked Questions</a></li>
+                                    <li><a href="#" className="navbar-href">Support Us</a></li>
+                                    <li><a href="#" className="navbar-href">Volunteer with Us</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">Our Projects</a>
+                                <a href="#" className="navbar-href">Our Projects</a>
                                 <ul>
-                                    <li><a href="#">Supporting Children</a></li>
-                                    <li><a href="#">Emergency Support</a></li>
-                                    <li><a href="#">Building an Orphanage</a></li>
-                                    <li><a href="#">Training Women for Jobs</a></li>
-                                    <li><a href="#">Sponsoring Education</a></li>
-                                    <li><a href="#">Water Pumps</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">How We Help</a>
-                        <ul>
-                            <li><a href="#">Our Work</a></li>
-                            <li><a href="#">Find a Project</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Campaigns</a>
-                        <ul>
-                            <li><a href="#">Education for All</a></li>
-                            <li><a href="#">Clean Water Initiative</a></li>
-                            <li><a href="#">Women Empowerment</a></li>
-                            <li><a href="#">Child Welfare</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Resources</a>
-                        <ul>
-                            <li><a href="#">Reports and Publications</a></li>
-                            <li><a href="#">Educational Resources</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Communities</a>
-                        <ul>
-                            <li>
-                                <a href="#">Community Resources</a>
-                                <ul>
-                                    <li><a href="#">Roma (Romanis) Colony</a></li>
-                                    <li><a href="#">Kotupuram Colony</a></li>
-                                    <li><a href="#">Narikuravur Colony</a></li>
-                                    <li><a href="#">Vugri People</a></li>
-                                    <li><a href="#">Cultural Heritage</a></li>
-                                    <li><a href="#">Community Stories</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Language Resources</a>
-                                <ul>
-                                    <li><a href="#">Tamil</a></li>
-                                    <li><a href="#">Local Dialects</a></li>
-                                    <li><a href="#">Community Languages</a></li>
-                                    <li><a href="#">Language Preservation</a></li>
+                                    <li><a href="#" className="navbar-href">Supporting Children</a></li>
+                                    <li><a href="#" className="navbar-href">Emergency Support</a></li>
+                                    <li><a href="#" className="navbar-href">Building an Orphanage</a></li>
+                                    <li><a href="#" className="navbar-href">Training Women for Jobs</a></li>
+                                    <li><a href="#" className="navbar-href">Sponsoring Education</a></li>
+                                    <li><a href="#" className="navbar-href">Water Pumps</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
-                    <li><a href="#">News</a></li>
+                    <li>
+                        <a href="#" className="navbar-href">How We Help</a>
+                        <ul>
+                            <li><a href="#" className="navbar-href">Our Work</a></li>
+                            <li><a href="#" className="navbar-href">Find a Project</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" className="navbar-href">Campaigns</a>
+                        <ul>
+                            <li><a href="#" className="navbar-href">Education for All</a></li>
+                            <li><a href="#" className="navbar-href">Clean Water Initiative</a></li>
+                            <li><a href="#" className="navbar-href">Women Empowerment</a></li>
+                            <li><a href="#" className="navbar-href">Child Welfare</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" className="navbar-href">Resources</a>
+                        <ul>
+                            <li><a href="#" className="navbar-href">Reports and Publications</a></li>
+                            <li><a href="#" className="navbar-href">Educational Resources</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" className="navbar-href">Communities</a>
+                        <ul>
+                            <li>
+                                <a href="#" className="navbar-href">Community Resources</a>
+                                <ul>
+                                    <li><a href="#" className="navbar-href">Roma (Romanis) Colony</a></li>
+                                    <li><a href="#" className="navbar-href">Kotupuram Colony</a></li>
+                                    <li><a href="#" className="navbar-href">Narikuravur Colony</a></li>
+                                    <li><a href="#" className="navbar-href">Vugri People</a></li>
+                                    <li><a href="#" className="navbar-href">Cultural Heritage</a></li>
+                                    <li><a href="#" className="navbar-href">Community Stories</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" className="navbar-href">Language Resources</a>
+                                <ul>
+                                    <li><a href="#" className="navbar-href">Tamil</a></li>
+                                    <li><a href="#" className="navbar-href">Local Dialects</a></li>
+                                    <li><a href="#" className="navbar-href">Community Languages</a></li>
+                                    <li><a href="#" className="navbar-href">Language Preservation</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#" className="navbar-href">News</a></li>
                 </ul>
-            <style jsx>{`
-                .invisible-button {
-                    background: none;
-                    border: none;
-                    cursor: pointer;
-                    padding: 0;
-                    display: inline;
-                }
-                `}</style>
-
             <div className="search-icon">
-              <button className="invisible-button">
-                <i className="fa fa-search white-icon"></i>
-              </button>
+              <SearchComponent />
             </div>
             </nav></>
     )
