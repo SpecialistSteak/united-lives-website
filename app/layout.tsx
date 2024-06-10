@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.variable}><header><HeaderAndNavbar></HeaderAndNavbar></header>{children}</body>
+      <body className={inter.variable}><header><HeaderAndNavbar /></header>{children}</body>
     </html>
   )
 }

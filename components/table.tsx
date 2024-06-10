@@ -3,8 +3,12 @@ import { timeAgo } from '@/lib/utils'
 import Image from 'next/image'
 import RefreshButton from './refresh-button'
 import { seed } from '@/lib/seed'
+import { unstable_noStore } from 'next/cache'; // Import the function from Next.js
+
+
 
 export default async function Table() {
+  unstable_noStore();
   let data
   let startTime = Date.now()
 
