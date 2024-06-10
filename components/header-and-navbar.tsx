@@ -1,7 +1,48 @@
-import { headers } from "next/headers"
+'use client';
+
+import React, { useEffect } from 'react';
+import $ from 'jquery';
 
 const HeaderAndNavbar = () => {
-    return (
+  useEffect(() => {
+    // Constants
+    const $mainNav = $('.main-nav');
+
+    // Submenu Hover Effect
+    function setupSubmenus() {
+      $mainNav.find('li').on("mouseenter", function() {
+        const $submenu = $(this).children('ul');
+        if ($submenu.length) {
+          $submenu.stop(true, true).fadeIn(300);
+        }
+      }).on("mouseleave", function() {
+        const $submenu = $(this).children('ul');
+        if ($submenu.length) {
+          $submenu.stop(true, true).fadeOut(200);
+        }
+      });
+    }
+    
+    // Initialize
+    function init() {
+      setupSubmenus();
+    }
+
+    init();
+
+    // Trigger in-page search
+    window.triggerSearch = function() {
+      let searchTerm = prompt("Enter the text to search for:");
+      if (searchTerm) {
+        if (!window.find(searchTerm)) {
+          alert("No matches found.");
+        }
+      }
+    }
+
+  }, []);
+
+  return (
         <><div className="top-bar">
             <nav>
                 <ul>
@@ -19,7 +60,7 @@ const HeaderAndNavbar = () => {
         </div><div className="main-bar">
                 <div className="logo">
                     <a href="#">
-                        <img src="united-lives-new-logo-with-text-cropped-minimized-white.svg" alt="United Lives Trust"></img>
+                        <img src="./united-lives-new-logo-with-text-cropped-minimized-white.svg" alt="United Lives" />
                     </a>
                 </div>
                 <div className="tagline">
@@ -124,12 +165,12 @@ const HeaderAndNavbar = () => {
                     padding: 0;
                     display: inline;
                 }
-            `}</style>
+                `}</style>
 
             <div className="search-icon">
-                <button onClick={triggerSearch} className="material-icons invisible-button">
-                    search
-                </button>
+              <button className="invisible-button">
+                <i className="fa fa-search white-icon"></i>
+              </button>
             </div>
             </nav></>
     )

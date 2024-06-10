@@ -395,3 +395,13 @@ header {
 .main-nav ul ul {
   animation: fadeIn 0.3s ease;
 }
+
+.search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.white-icon {
+  color: white;
+}
