@@ -4,6 +4,8 @@ import '../styles/bootstrap.min.css';
 import { Inter } from 'next/font/google';
 import HeaderAndNavbar from '@/components/header-and-navbar';
 import './window.d.ts';
+import SubNavBanner from "@/components/sub-nav-banner";
+
 
 export const metadata = {
   metadataBase: new URL('https://postgres-starter.vercel.app'),
@@ -25,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.variable}><header><HeaderAndNavbar /></header>{children}</body>
+      <body className={inter.variable}><header><HeaderAndNavbar /></header><SubNavBanner />{children}</body>
     </html>
   )
 }

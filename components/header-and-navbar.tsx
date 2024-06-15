@@ -82,7 +82,7 @@ const HeaderAndNavbar = () => {
         <div className="logo">
           <a href="#" className="navbar-href">
             <img
-              src="./united-lives-new-logo-with-text-cropped-minimized-white.svg"
+              src="/Images/united-lives-new-logo-with-text-cropped-minimized-white.svg"
               alt="United Lives"
             />
           </a>

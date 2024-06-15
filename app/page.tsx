@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 import Table from "@/components/table";
 import ExpandingArrow from "@/components/expanding-arrow";
 import Footer from "@/components/footer";
@@ -65,7 +64,7 @@ export default function Home() {
         <div className="sm:absolute sm:bottom-0 w-full px-20 py-10 flex justify-between">
           <Link href="https://vercel.com">
             <Image
-              src="/vercel.svg"
+              src="/Images/vercel.svg"
               alt="Vercel Logo"
               width={100}
               height={24}
@@ -77,7 +76,7 @@ export default function Home() {
             className="flex items-center space-x-2"
           >
             <Image
-              src="/github.svg"
+              src="/Images/github.svg"
               alt="GitHub Logo"
               width={24}
               height={24}
