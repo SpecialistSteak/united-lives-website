@@ -1,18 +1,16 @@
-import React, { useState, useRef } from "react";
-import { FaSearch } from "react-icons/fa"; // Ensure you have react-icons installed
-import "@/styles/search-component.css";
+import React, { useState, useRef, useEffect } from 'react';
+import { FaSearch } from 'react-icons/fa';
+import '@/styles/search-component.css';
 
-const ScrollToTerm = () => {
+const ScrollToTerm: React.FC = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const scrollToTerm = () => {
-    const term = inputRef.current?.value || "";
+    const term = inputRef.current?.value || '';
     if (term) {
-      const regex = new RegExp(term, "i"); // 'i' for case-insensitive
-      const textNodes = Array.from(
-        document.body.getElementsByTagName("*")
-      ).filter(
+      const regex = new RegExp(term, 'i');
+      const textNodes = Array.from(document.body.getElementsByTagName('*')).filter(
         (element) => element.firstChild && element.firstChild.nodeType === 3
       );
       setIsSearchVisible(false);
@@ -21,19 +19,18 @@ const ScrollToTerm = () => {
       }
       for (let node of textNodes) {
         if (node.textContent && node.textContent.match(regex)) {
-          node.scrollIntoView({ behavior: "smooth", block: "center" });
+          node.scrollIntoView({ behavior: 'smooth', block: 'center' });
           break;
         }
       }
       if (inputRef.current) {
-        inputRef.current.value = "";
+        inputRef.current.value = '';
       }
     }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log("Key pressed:", event.key); // Debugging line
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       scrollToTerm();
     }
   };
@@ -42,8 +39,7 @@ const ScrollToTerm = () => {
     setIsSearchVisible(!isSearchVisible);
   };
 
-  // Add event listeners when the component mounts and remove them when it unmounts
-  React.useEffect(() => {
+  useEffect(() => {
     const handleClickAway = (event: MouseEvent) => {
       if (
         isSearchVisible &&
@@ -55,17 +51,17 @@ const ScrollToTerm = () => {
     };
 
     const handleEscape = (event: KeyboardEvent) => {
-      if (isSearchVisible && event.key === "Escape") {
+      if (isSearchVisible && event.key === 'Escape') {
         setIsSearchVisible(false);
       }
     };
 
-    document.addEventListener("mousedown", handleClickAway);
-    document.addEventListener("keydown", handleEscape);
+    document.addEventListener('mousedown', handleClickAway);
+    document.addEventListener('keydown', handleEscape);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickAway);
-      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener('mousedown', handleClickAway);
+      document.removeEventListener('keydown', handleEscape);
     };
   }, [isSearchVisible]);
 
