@@ -5,7 +5,10 @@ import { Inter } from "next/font/google";
 import HeaderAndNavbar from "@/components/header-and-navbar";
 import "./window.d.ts";
 import SubNavBanner from "@/components/sub-nav-banner";
+
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react"
+
 
 export const metadata = {
   metadataBase: new URL("https://postgres-starter.vercel.app"),
@@ -32,6 +35,7 @@ export default function RootLayout({
         </header>
         <SubNavBanner />
         {children}
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>
