@@ -8,6 +8,7 @@ import { images, CustomImage } from "./images";
 
 export default function ImageGallery() {
   const [index, setIndex] = useState(-1);
+  const [loading, setLoading] = useState(true);
 
   const currentImage = images[index];
   const nextIndex = (index + 1) % images.length;
@@ -17,10 +18,27 @@ export default function ImageGallery() {
 
   const handleClick = (index: number, item: CustomImage) => {
     setIndex(index);
+    setLoading(true);
   };
-  const handleClose = () => setIndex(-1);
-  const handleMovePrev = () => setIndex(prevIndex);
-  const handleMoveNext = () => setIndex(nextIndex);
+
+  const handleClose = () => {
+    setIndex(-1);
+    setLoading(false); 
+  };
+
+  const handleMovePrev = () => {
+    setIndex(prevIndex);
+    setLoading(true);
+  };
+
+  const handleMoveNext = () => {
+    setIndex(nextIndex);
+    setLoading(true);
+  };
+
+  const handleImageLoad = () => {
+    setLoading(false);
+  };
 
   return (
     <div>
@@ -30,7 +48,6 @@ export default function ImageGallery() {
         enableImageSelection={false}
       />
       {!!currentImage && (
-        /* @ts-ignore */
         <Lightbox
           mainSrc={currentImage.original}
           imageTitle={currentImage.caption}
@@ -42,6 +59,7 @@ export default function ImageGallery() {
           onCloseRequest={handleClose}
           onMovePrevRequest={handleMovePrev}
           onMoveNextRequest={handleMoveNext}
+          onImageLoad={handleImageLoad}
         />
       )}
     </div>
