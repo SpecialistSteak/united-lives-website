@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Table from "@/components/table";
 import ExpandingArrow from "@/components/expanding-arrow";
-import Footer from "@/components/footer";
 import PhotoGallery from "@/components/Gallery/image-gallery";
+import SubNavBanner from "@/components/sub-nav-banner";
 
 export const runtime = "edge";
 export const preferredRegion = "home";
@@ -12,6 +12,7 @@ export const dynamic = "force-dynamic";
 export default function Home() {
   return (
     <>
+      <SubNavBanner />
       <PhotoGallery />
       <main className="relative flex min-h-screen flex-col items-center justify-center">
         <Link
@@ -88,7 +89,6 @@ export default function Home() {
           </Link>
         </div>
       </main>
-      <Footer />
     </>
   );
 }

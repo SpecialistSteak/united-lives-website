@@ -1,19 +1,19 @@
 import "../styles/globals.css";
 import "../styles/Fork-Awesome-1.2.0/css/fork-awesome.min.css";
 import "../styles/bootstrap.min.css";
+import "../styles/keep-footer-down-and-header-up.css";
 import { Inter } from "next/font/google";
-import HeaderAndNavbar from "@/components/header-and-navbar";
 import "./window.d.ts";
-import SubNavBanner from "@/components/sub-nav-banner";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react"
-
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   metadataBase: new URL("https://postgres-starter.vercel.app"),
-  title: "Vercel Postgres Demo",
-  description: "A simple Next.js app with Vercel Postgres as the database",
+  title: "UnitedLives",
+  description: "The UnitedLives NGOs website.",
 };
 
 const inter = Inter({
@@ -30,13 +30,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <header>
-          <HeaderAndNavbar />
-        </header>
-        <SubNavBanner />
+        <Header />
         {children}
         <Analytics />
         <SpeedInsights />
+        <Footer />
       </body>
     </html>
   );

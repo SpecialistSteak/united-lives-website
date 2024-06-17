@@ -33,13 +33,14 @@ const Footer = () => {
           </div>
           <div className="col-lg-4 col-xs-12 location">
             <h4 className="mt-lg-0 mt-sm-4">Get Involved</h4>
-            <p>Join our community and make a difference. Sign up to volunteer or donate to our cause.</p>
+            <p>Join our community and make a difference. Sign up to volunteer for our cause.</p>
             <p>Volunteer: <a href="#">Sign Up</a></p>
-            <p>Donate: <a href="#">Give Now</a></p>
             <h4 className="mt-4">Contact Us</h4>
             <p>3/92b, Padasalai Street, Vettuvankani, ECR,<br />Chennai- 600 115.</p>
             <p className="mb-0">Phone: <a href="tel:04460507333">(044) 60507333</a></p>
             <p>Email: <a href="mailto:info@unitedlives.in">info@unitedlives.in</a></p>
+            <h4 className="mt-4">Donate</h4>
+            <p>Donate: <a href="#">Give Now</a></p>
           </div>
         </div>
         <div className="row mt-5">

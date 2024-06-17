@@ -2,10 +2,10 @@
 
 import React, { useEffect } from "react";
 import $ from "jquery";
-import "../styles/header-and-navbar.css";
+import "../styles/header.css";
 import SearchComponent from "./search-component";
 
-const HeaderAndNavbar = () => {
+const Header = () => {
   useEffect(() => {
     // Constants
     const $mainNav = $(".main-nav");
@@ -28,12 +28,7 @@ const HeaderAndNavbar = () => {
         });
     }
 
-    // Initialize
-    function init() {
-      setupSubmenus();
-    }
-
-    init();
+    setupSubmenus();
 
     // Define triggerSearch only if window is available
     if (typeof window !== "undefined") {
@@ -50,7 +45,7 @@ const HeaderAndNavbar = () => {
   }, []);
 
   return (
-    <>
+    <header>
       <div className="top-bar">
         <nav>
           <ul>
@@ -97,8 +92,13 @@ const HeaderAndNavbar = () => {
       <nav className="main-nav">
         <ul>
           <li>
-            <a href="#" className="navbar-href">
+            <a href="/" className="navbar-href">
               Home
+            </a>
+          </li>
+          <li>
+            <a href="/gallery/1" className="navbar-href">
+              Gallery
             </a>
           </li>
           <li>
@@ -361,8 +361,8 @@ const HeaderAndNavbar = () => {
           <SearchComponent />
         </div>
       </nav>
-    </>
+    </header>
   );
 };
 
-export default HeaderAndNavbar;
+export default Header;
