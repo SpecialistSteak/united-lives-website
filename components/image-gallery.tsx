@@ -4,9 +4,20 @@ import { useState } from "react";
 import { Gallery } from "react-grid-gallery";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
-import { images, CustomImage } from "./images";
+import { CustomImage } from "../types/image-gallery";
 
-export default function ImageGallery() {
+// EXAMPLE IMAGE
+// const images: CustomImage[] = [
+  // {
+    // src: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
+    // original: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
+    // width: 320,
+    // height: 174,
+    // caption: "After Rain (Jeshu John - designerspics.com)",
+  // },
+// ];
+
+export default function ImageGallery({ images }: { images: CustomImage[] }) {
   const [index, setIndex] = useState(-1);
   const [loading, setLoading] = useState(true);
 
@@ -23,7 +34,7 @@ export default function ImageGallery() {
 
   const handleClose = () => {
     setIndex(-1);
-    setLoading(false); 
+    setLoading(false);
   };
 
   const handleMovePrev = () => {

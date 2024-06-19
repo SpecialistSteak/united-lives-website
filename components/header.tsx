@@ -75,7 +75,7 @@ const Header = () => {
       </div>
       <div className="main-bar">
         <div className="logo">
-          <a href="#" className="navbar-href">
+          <a href="/" className="navbar-href">
             <img
               src="/Images/united-lives-new-logo-with-text-cropped-minimized-white.svg"
               alt="United Lives"
@@ -97,7 +97,7 @@ const Header = () => {
             </a>
           </li>
           <li>
-            <a href="/gallery/1" className="navbar-href">
+            <a href="/gallery" className="navbar-href">
               Gallery
             </a>
           </li>
