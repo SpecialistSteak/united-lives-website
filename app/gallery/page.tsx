@@ -16,6 +16,15 @@ async function getNextImages(limit: number, cursor?: string) {
   return data;
 }
 
+async function checkHasMore(cursor?: string) {
+  // Rename function
+  const response = await fetch(`/api/gallery/hasMore?cursor=${cursor ?? ""}`, {
+    method: "GET",
+  });
+  const data = await response.json();
+  return data.hasMore;
+}
+
 const GalleryPage = ({
   response,
 }: {
@@ -43,7 +52,7 @@ export default function Page() {
 
   // Define fetchImages outside of useEffect
   const fetchImages = async () => {
-    if (!isLoading) {
+    if (!isLoading && hasMore) {
       setIsLoading(true);
       let response = await getNextImages(10, cursor);
       if (response.blobs.length > 0) {
@@ -58,6 +67,8 @@ export default function Page() {
         );
         setAllImages((prevImages) => [...prevImages, ...images]);
         setCursor(response.cursor);
+        const moreAvailable = await checkHasMore(response.cursor);
+        setHasMore(moreAvailable);
       } else {
         setHasMore(false);
       }
