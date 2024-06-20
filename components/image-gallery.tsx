@@ -60,6 +60,8 @@ export default function ImageGallery({ images }: { images: CustomImage[] }) {
           height: typeof img.height === 'number' ? img.height : 0, // Ensuring height is a number
           caption: img.caption
         }))}
+        rowHeight={360}
+        margin={4}
         onClick={(index: number) => handleClick(index, images[index])}
         enableImageSelection={false}
       />

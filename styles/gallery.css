@@ -1,0 +1,25 @@
+.image-gallery-container-div {
+  margin: 2rem;
+}
+
+img[data-testid="grid-gallery-item_thumbnail"] {
+  border-radius: 3.5px;
+}
+
+img[data-testid="grid-gallery-item_thumbnail"] :hover {
+  border-radius: 3.5px;
+}
+
+.load-more-button {
+  margin-top: 1rem;
+  background-color: #4180cb;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.footer {
+  margin-top: 0 !important;
+}

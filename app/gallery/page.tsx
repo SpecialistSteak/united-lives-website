@@ -3,6 +3,7 @@
 import ImageGallery from "../../components/image-gallery";
 import { CustomImage } from "../../types/image-gallery";
 import { useEffect, useState } from "react";
+import "../../styles/gallery.css";
 
 async function getNextImages(limit: number, cursor?: string) {
   const response = await fetch(
@@ -84,26 +85,19 @@ export default function Page() {
   }, []);
 
   return (
-    <>
+    <div className="image-gallery-container-div">
       <ImageGallery images={allImages} />
       {hasMore && (
         <div className="flex justify-center">
           <button
             onClick={fetchImages}
             disabled={isLoading}
-            style={{
-              backgroundColor: "#4180cb",
-              color: "white",
-              padding: "10px 20px",
-              border: "none",
-              borderRadius: "5px",
-              cursor: isLoading ? "default" : "pointer",
-            }}
+            className="load-more-button"
           >
             {isLoading ? "Loading..." : "Load More"}
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 }
