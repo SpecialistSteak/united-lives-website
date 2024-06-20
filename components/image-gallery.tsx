@@ -54,8 +54,13 @@ export default function ImageGallery({ images }: { images: CustomImage[] }) {
   return (
     <div>
       <Gallery
-        images={images}
-        onClick={handleClick}
+        images={images.map(img => ({
+          src: img.src,
+          width: typeof img.width === 'number' ? img.width : 0, // Ensuring width is a number
+          height: typeof img.height === 'number' ? img.height : 0, // Ensuring height is a number
+          caption: img.caption
+        }))}
+        onClick={(index: number) => handleClick(index, images[index])}
         enableImageSelection={false}
       />
       {!!currentImage && (

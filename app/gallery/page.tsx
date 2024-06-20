@@ -39,6 +39,7 @@ export default function Page() {
   const [allImages, setAllImages] = useState<CustomImage[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  let firstPrint = true;
 
   // Define fetchImages outside of useEffect
   const fetchImages = async () => {
@@ -65,7 +66,10 @@ export default function Page() {
   };
 
   useEffect(() => {
-    fetchImages();
+    if (firstPrint) {
+      firstPrint = false;
+      fetchImages();
+    }
   }, []);
 
   return (
