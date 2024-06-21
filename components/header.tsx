@@ -352,7 +352,7 @@ const Header = () => {
             </ul>
           </li>
           <li>
-            <a href="#" className="navbar-href">
+            <a href="/blog" className="navbar-href">
               News
             </a>
           </li>

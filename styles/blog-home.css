@@ -1,0 +1,104 @@
+.blog-container {
+  max-width: 1540px; /* Increase the max-width */
+  margin: 0 auto;
+  padding: 40px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.blog-post {
+  margin-bottom: 60px;
+  padding: 40px;
+  border-radius: 10px;
+  animation: fadeIn 1s forwards;
+  opacity: 0;
+  width: 100%;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: box-shadow 0.3s ease-in-out;
+  position: relative;
+  /* left: -70px; Move it more to the left */
+}
+
+.blog-post:hover {
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+  /* center it slightly then shift to the left, and then put some space below it */
+  text-align: center;
+  margin-left: 10px;
+  margin-top: 40px;
+}
+
+.blog-post h2 {
+  margin-top: 0;
+  font-size: 2em;
+  color: #333;
+}
+
+.blog-post h2 a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s;
+}
+
+.blog-post h2 a:hover {
+  color: #0070f3;
+}
+
+.blog-content {
+  position: relative;
+  overflow: hidden;
+  line-height: 1.6;
+  max-height: 8em;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.blog-content::after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 1.5em; /* Make the font fade off a bit lower */
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1) 80%
+  );
+}
+
+.tags {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.tag {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.tag:hover {
+  background-color: #e0e0f0;
+}
+
+.created-at {
+  font-size: 0.9em;
+  color: #888;
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
