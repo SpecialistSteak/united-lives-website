@@ -35,6 +35,9 @@ export default function Blog() {
                 {post.title}
               </a>
             </h2>
+            <p className="blog-content">
+              {post.content.split(" ").slice(0, 60).join(" ")}...
+            </p>
             <div className="tags">
               {post.tags.map((tag: string) => (
                 <span key={tag} className="tag">
@@ -46,11 +49,6 @@ export default function Blog() {
               Created At:{" "}
               {post.createdAt instanceof Date && !isNaN(post.createdAt.valueOf()) ? post.createdAt.toLocaleDateString() : "Unknown"}
             </p>
-            <div className="blog-content">
-              <p>
-                {post.content.split(" ").slice(0, 60).join(" ")}...
-              </p>
-            </div>
           </div>
         ))}
       </div>

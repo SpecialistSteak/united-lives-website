@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BlogPost } from "@/types/blog-post";
+import "../../../styles/blog-id-page.css";
 
 export default function BlogPostPage({
   params,
@@ -23,7 +25,7 @@ export default function BlogPostPage({
           const data = await response.json();
           setPost({
             ...data,
-            createdAt: new Date(data.createdAt)  // Convert back to Date object
+            createdAt: new Date(data.createdAt), // Convert back to Date object
           });
           setError(null);
         } catch (err) {
@@ -38,24 +40,47 @@ export default function BlogPostPage({
     fetchPost();
   }, [postId]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading post: {error}</p>;
-  if (!post) return <p>No post found.</p>;
+  if (loading)
+    return (
+      <div className="loading-container">
+        <Image src="/images/loading.gif" alt="Loading..." width={50} height={50} />
+        <p>Loading...</p>
+      </div>
+    );
+  if (error)
+    return (
+      <div className="error-container">
+        <Image src="/images/error.gif" alt="Error" width={50} height={50} />
+        <p>Error loading post: {error}</p>
+      </div>
+    );
+  if (!post)
+    return (
+      <div className="no-post-container">
+        <Image src="/images/no-post.gif" alt="No Post" width={50} height={50} />
+        <p>No post found.</p>
+      </div>
+    );
 
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-      <div>
-        <strong>Tags:</strong>
-        {post.tags.map((tag) => (
-          <span key={tag}> {tag}</span>
-        ))}
+    <div className="post-container">
+      <h1 className="post-title">{post.title}</h1>
+      <div className="info-container">
+        <div className="tags-container">
+          <strong className="tags-label">Tags:</strong>
+          {post.tags.map((tag) => (
+            <span key={tag} className="tag">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div className="published-container">
+          <strong className="published-label">Published:</strong>{" "}
+          {post.createdAt.toLocaleDateString()}
+        </div>
       </div>
-      <div>
-        <strong>Published:</strong>{" "}
-        {post.createdAt.toLocaleDateString()}
-      </div>
+      <hr className="separator" />
+      <p className="post-content">{post.content}</p>
     </div>
   );
 }
