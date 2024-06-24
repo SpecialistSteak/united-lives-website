@@ -38,7 +38,7 @@ const SubNavBanner: React.FC = () => {
         <div className="content-image"></div>
         <div className="overlay-image">
           <Image
-            src="/images/United-Lives-Mobile-Banner-SVG-cropped.svg"
+            src="/Images/United-Lives-Mobile-Banner-SVG-cropped.svg"
             alt="United Lives Mobile Banner"
             width={270}
             height={93.94350383631715}
