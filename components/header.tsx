@@ -4,13 +4,8 @@ import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import "../styles/header.css";
 import SearchComponent from "./search-component";
-import Image from 'next/image';
-
-interface MenuItem {
-  label: string;
-  href: string;
-  children?: MenuItem[];
-}
+import Image from "next/image";
+import { MenuItem } from "../types/menu-item";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -20,31 +15,33 @@ const Header = () => {
     const $mainNav = $(".main-nav");
 
     function setupSubmenus() {
-      $mainNav.find("li").each(function() {
+      $mainNav.find("li").each(function () {
         const $this = $(this);
         const $link = $this.children("a");
         const $submenu = $this.children("ul");
-        
+
         if ($submenu.length) {
           // For desktop: mouseenter and mouseleave events
-          $this.on("mouseenter", function() {
-            if (window.innerWidth > 768) {
-              $submenu.stop(true, true).fadeIn(300);
-            }
-          }).on("mouseleave", function() {
-            if (window.innerWidth > 768) {
-              $submenu.stop(true, true).fadeOut(200);
-            }
-          });
+          $this
+            .on("mouseenter", function () {
+              if (window.innerWidth > 768) {
+                $submenu.stop(true, true).fadeIn(300);
+              }
+            })
+            .on("mouseleave", function () {
+              if (window.innerWidth > 768) {
+                $submenu.stop(true, true).fadeOut(200);
+              }
+            });
 
           // For mobile: toggle submenu on click
-          $link.on("click", function(e) {
+          $link.on("click", function (e) {
             if (window.innerWidth <= 768) {
               e.preventDefault();
               const index = $this.index();
-              setOpenSubmenus(prev => ({
+              setOpenSubmenus((prev) => ({
                 ...prev,
-                [index]: !prev[index]
+                [index]: !prev[index],
               }));
             }
           });
@@ -73,15 +70,17 @@ const Header = () => {
   const renderMenuItems = (items: MenuItem[], level = 0) => {
     return items.map((item, index) => (
       <li key={index}>
-        <a 
-          href={item.href} 
-          className={`navbar-href ${item.children ? 'has-submenu' : ''} ${openSubmenus[`${level}-${index}`] ? 'open' : ''}`}
+        <a
+          href={item.href}
+          className={`navbar-href ${item.children ? "has-submenu" : ""} ${
+            openSubmenus[`${level}-${index}`] ? "open" : ""
+          }`}
           onClick={(e) => {
             if (item.children && window.innerWidth <= 768) {
               e.preventDefault();
-              setOpenSubmenus(prev => ({
+              setOpenSubmenus((prev) => ({
                 ...prev,
-                [`${level}-${index}`]: !prev[`${level}-${index}`]
+                [`${level}-${index}`]: !prev[`${level}-${index}`],
               }));
             }
           }}
@@ -89,7 +88,11 @@ const Header = () => {
           {item.label}
         </a>
         {item.children && (
-          <ul style={{display: openSubmenus[`${level}-${index}`] ? 'block' : 'none'}}>
+          <ul
+            style={{
+              display: openSubmenus[`${level}-${index}`] ? "block" : "none",
+            }}
+          >
             {renderMenuItems(item.children, level + 1)}
           </ul>
         )}
@@ -222,7 +225,7 @@ const Header = () => {
               alt="United Lives"
               width={100}
               height={100}
-              style={{ width: '100%', height: 'auto' }}
+              style={{ width: "100%", height: "auto" }}
               priority
             />
           </a>
@@ -243,22 +246,20 @@ const Header = () => {
               alt="United Lives"
               width={100}
               height={100}
-              style={{ width: '100%', height: 'auto' }}
+              style={{ width: "100%", height: "auto" }}
               priority
             />
           </a>
         </div>
         <button className="menu-toggle" onClick={toggleMobileMenu}>
           <span className="material-icons">
-            {isMobileMenuOpen ? 'close' : 'menu'}
+            {isMobileMenuOpen ? "close" : "menu"}
           </span>
         </button>
       </div>
 
-      <nav className={`main-nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
-        <ul>
-          {renderMenuItems(menuItems)}
-        </ul>
+      <nav className={`main-nav ${isMobileMenuOpen ? "mobile-open" : ""}`}>
+        <ul>{renderMenuItems(menuItems)}</ul>
         <div className="search-icon">
           <SearchComponent />
         </div>
