@@ -253,7 +253,7 @@ const Header = () => {
         </div>
         <button className="menu-toggle" onClick={toggleMobileMenu}>
           <span className="material-icons">
-            {isMobileMenuOpen ? "close" : "menu"}
+            {isMobileMenuOpen ? "\u2715" : "\u2630"}
           </span>
         </button>
       </div>
