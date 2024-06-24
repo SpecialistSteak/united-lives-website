@@ -1,7 +1,4 @@
-// app/blog/[id]/page.tsx
-
 "use client";
-
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BlogPost } from "@/types/blog-post";
@@ -27,7 +24,7 @@ export default function BlogPostPage({
           const data = await response.json();
           setPost({
             ...data,
-            createdAt: new Date(data.createdAt), // Convert back to Date object
+            createdAt: new Date(data.createdAt),
           });
           setError(null);
         } catch (err) {
@@ -38,9 +35,40 @@ export default function BlogPostPage({
         }
       }
     };
-
     fetchPost();
   }, [postId]);
+
+  // Function to parse and render allowed HTML tags
+  const renderContent = (content: string) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(content, 'text/html');
+    
+    const renderNode = (node: Node): React.ReactNode => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        return node.textContent;
+      }
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        const element = node as Element;
+        const children = Array.from(element.childNodes).map(renderNode);
+        
+        switch (element.tagName.toLowerCase()) {
+          case 'b':
+          case 'strong':
+            return <strong key={Math.random()}>{children}</strong>;
+          case 'i':
+          case 'em':
+            return <em key={Math.random()}>{children}</em>;
+          case 'a':
+            return <a key={Math.random()} href={element.getAttribute('href') || '#'} target="_blank" rel="noopener noreferrer">{children}</a>;
+          default:
+            return <>{children}</>;
+        }
+      }
+      return null;
+    };
+
+    return <>{Array.from(doc.body.childNodes).map(renderNode)}</>;
+  };
 
   if (loading)
     return (
@@ -49,6 +77,7 @@ export default function BlogPostPage({
         <p>Loading...</p>
       </div>
     );
+
   if (error)
     return (
       <div className="error-container">
@@ -56,6 +85,7 @@ export default function BlogPostPage({
         <p>Error loading post: {error}</p>
       </div>
     );
+
   if (!post)
     return (
       <div className="no-post-container">
@@ -82,7 +112,9 @@ export default function BlogPostPage({
         </div>
       </div>
       <hr className="separator" />
-      <p className="post-content">{post.content}</p>
+      <div className="post-content">
+        {renderContent(post.content)}
+      </div>
     </div>
   );
 }
