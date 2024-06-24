@@ -1,39 +1,58 @@
+:root {
+  --text-color: #333;
+  --background-color: #f9f9f9;
+  --card-background: #ffffff;
+  --accent-color: #0066cc;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
 .blog-container {
-  max-width: 1540px; /* Increase the max-width */
-  margin: 0 auto;
+  max-width: 85vw;
+  margin: 0px 7.5vw 0px;
   padding: 40px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .blog-post {
   margin-bottom: 60px;
-  padding: 40px;
-  border-radius: 10px;
+  padding: 60px;
+  border-radius: 12px;
   animation: fadeIn 1s forwards;
   opacity: 0;
   width: 100%;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: var(--card-background);
   transition: box-shadow 0.3s ease-in-out;
   position: relative;
-  /* left: -70px; Move it more to the left */
 }
 
 .blog-post:hover {
-  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 h1 {
-  /* center it slightly then shift to the left, and then put some space below it */
   text-align: center;
   margin-left: 10px;
   margin-top: 40px;
+  font-size: 2.8em;
+  color: var(--text-color);
+  font-weight: 700;
 }
 
 .blog-post h2 {
   margin-top: 0;
-  font-size: 2em;
-  color: #333;
+  font-size: 2.2em;
+  color: var(--text-color);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .blog-post h2 a {
@@ -43,16 +62,17 @@ h1 {
 }
 
 .blog-post h2 a:hover {
-  color: #0070f3;
+  color: var(--accent-color);
 }
 
 .blog-content {
   position: relative;
   overflow: hidden;
-  line-height: 1.6;
+  line-height: 1.8;
   max-height: 8em;
   margin-bottom: 30px;
   color: #555;
+  font-size: 1.1em;
 }
 
 .blog-content::after {
@@ -62,7 +82,7 @@ h1 {
   bottom: 0;
   right: 0;
   width: 100%;
-  height: 1.5em; /* Make the font fade off a bit lower */
+  height: 2em;
   background: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0),
@@ -77,12 +97,12 @@ h1 {
 
 .tag {
   display: inline-block;
-  margin-right: 10px;
-  padding: 8px 16px;
+  margin: 5px;
+  padding: 5px 10px;
   background-color: #f0f0f0;
   border-radius: 20px;
   transition: background-color 0.3s;
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: #333;
 }
 
@@ -92,9 +112,10 @@ h1 {
 
 .created-at {
   font-size: 0.9em;
-  color: #888;
+  color: #666;
   margin-top: 30px;
   margin-bottom: 0;
+  font-style: italic;
 }
 
 @keyframes fadeIn {
@@ -105,10 +126,42 @@ h1 {
 
 .load-more-button {
   display: block;
-  margin: 40px auto;
-  padding: 10px 20px;
-  background-color: #0070f3;
+  margin: 0px auto 40px;
+  padding: 12px 24px;
+  background-color: var(--accent-color);
   color: #fff;
   border: none;
   border-radius: 5px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.load-more-button:hover {
+  background-color: #0052a3;
+}
+
+@media (max-width: 768px) {
+  .blog-container {
+    max-width: 90vw;
+    padding: 20px;
+    margin: 60px 5vw;
+  }
+
+  .blog-post {
+    padding: 30px;
+  }
+
+  h1 {
+    font-size: 2.2em;
+  }
+
+  .blog-post h2 {
+    font-size: 1.8em;
+  }
+
+  .blog-content {
+    font-size: 1em;
+  }
 }
