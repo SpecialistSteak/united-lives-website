@@ -110,33 +110,6 @@ const Header = () => {
                 <a href="#" className="navbar-href">
                   Our Vision
                 </a>
-                <ul>
-                  <li>
-                    <a href="#" className="navbar-href">
-                      Education & Literacy
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="navbar-href">
-                      Health & Family Welfare
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="navbar-href">
-                      Food Processing
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="navbar-href">
-                      Community Development
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="navbar-href">
-                      Tamil Nadu Initiatives
-                    </a>
-                  </li>
-                </ul>
               </li>
               <li>
                 <a href="#" className="navbar-href">
@@ -150,12 +123,7 @@ const Header = () => {
                   </li>
                   <li>
                     <a href="#" className="navbar-href">
-                      Our Trustees
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="navbar-href">
-                      Our Partners
+                      Our Partners and Trustees
                     </a>
                   </li>
                   <li>
@@ -292,22 +260,7 @@ const Header = () => {
                 <ul>
                   <li>
                     <a href="#" className="navbar-href">
-                      Roma (Romanis) Colony
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="navbar-href">
                       Kotupuram Colony
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="navbar-href">
-                      Narikuravur Colony
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="navbar-href">
-                      Vugri People
                     </a>
                   </li>
                   <li>

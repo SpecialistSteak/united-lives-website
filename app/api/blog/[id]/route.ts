@@ -1,3 +1,5 @@
+// app/api/blog/[id]/route.ts
+
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 import { BlogPost } from "../../../../types/blog-post";

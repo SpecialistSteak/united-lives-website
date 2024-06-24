@@ -102,3 +102,13 @@ h1 {
     opacity: 1;
   }
 }
+
+.load-more-button {
+  display: block;
+  margin: 40px auto;
+  padding: 10px 20px;
+  background-color: #0070f3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}

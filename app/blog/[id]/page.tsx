@@ -1,3 +1,5 @@
+// app/blog/[id]/page.tsx
+
 "use client";
 
 import Image from "next/image";
