@@ -16,7 +16,6 @@ export default function Blog() {
     try {
       const response = await fetch(`/api/blog?page=${pageNumber}&limit=10`);
       const data = await response.json();
-      console.log("API Response:", data); // Debug log
 
       const newPosts = data.map((post: any) => ({
         ...post,
@@ -52,10 +51,6 @@ export default function Blog() {
   const handleLoadMore = () => {
     getBlogPosts(page);
   };
-
-  for (let i = 0; i < blogPosts.length; i++) {
-    console.log(blogPosts[i].content);
-  }
 
   return (
     <div className="blog-outer-container">
