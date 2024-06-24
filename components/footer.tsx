@@ -114,19 +114,6 @@ const Footer = () => {
               paddingTop: "15px",
             }}
           >
-            <div
-              style={{
-                content: '""',
-                position: "absolute",
-                top: "0",
-                left: "50%",
-                transform: "translateX(-50%)",
-                width: "30px",
-                height: "3px",
-                backgroundColor: "rgba(255, 255, 255, 0.5)",
-                borderRadius: "2px",
-              }}
-            />
             <div className="d-flex justify-content-between align-items-center mb-0">
               <small className="text-white-50">
                 United Lives © 2024. All Rights Reserved.
