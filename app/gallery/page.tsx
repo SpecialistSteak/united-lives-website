@@ -1,96 +1,70 @@
+// app/gallery/page.tsx
+
 "use client";
 
-import ImageGallery from "../../components/image-gallery";
-import { CustomImage } from "../../types/image-gallery";
-import { useEffect, useState } from "react";
-import "../../styles/gallery.css";
+import { useEffect, useState, useCallback, useRef } from "react";
+import ImageGallery from "@/components/image-gallery";
+import { GalleryResponse } from "@/types/gallery-response";
+import { CustomImage } from "@/types/image-gallery";
+import "@/styles/gallery.css";
 
-async function getNextImages(limit: number, cursor?: string) {
-  const response = await fetch(
-    `/api/gallery?limit=${limit}&cursor=${cursor ?? ""}`,
-    {
-      method: "GET",
-    }
-  );
 
-  const data = await response.json();
-  return data;
-}
+const ITEMS_PER_PAGE = 10;
 
-async function checkHasMore(cursor?: string) {
-  // Rename function
-  const response = await fetch(`/api/gallery/hasMore?cursor=${cursor ?? ""}`, {
-    method: "GET",
-  });
-  const data = await response.json();
-  return data.hasMore;
-}
-
-const GalleryPage = ({
-  response,
-}: {
-  response: { blobs: { downloadUrl: string; pathname: string }[] };
-}) => {
-  const images: CustomImage[] = response.blobs.map(
-    (blob: { downloadUrl: string; pathname: string }) => ({
-      src: blob.downloadUrl,
-      original: blob.downloadUrl,
-      layout: "fill",
-      objectFit: "contain",
-      caption: blob.pathname,
-    })
-  );
-
-  return <ImageGallery images={images} />;
-};
-
-export default function Page() {
-  const [cursor, setCursor] = useState("");
-  const [allImages, setAllImages] = useState<CustomImage[]>([]);
+export default function GalleryPage() {
+  const [images, setImages] = useState<CustomImage[]>([]);
+  const [cursor, setCursor] = useState<string | undefined>(undefined);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  let firstPrint = true;
+  const initialLoadComplete = useRef(false);
 
-  // Define fetchImages outside of useEffect
-  const fetchImages = async () => {
-    if (!isLoading && hasMore) {
-      setIsLoading(true);
-      let response = await getNextImages(10, cursor);
-      if (response.blobs.length > 0) {
-        const images: CustomImage[] = response.blobs.map(
-          (blob: { downloadUrl: string; pathname: string }) => ({
-            src: blob.downloadUrl,
-            original: blob.downloadUrl,
-            layout: "fill",
-            objectFit: "contain",
-            caption: blob.pathname,
-          })
-        );
-        setAllImages((prevImages) => [...prevImages, ...images]);
-        setCursor(response.cursor);
-        const moreAvailable = await checkHasMore(response.cursor);
-        setHasMore(moreAvailable);
-      } else {
-        setHasMore(false);
-      }
+  const fetchImages = useCallback(async (isInitialLoad: boolean) => {
+    if (isLoading || (!hasMore && !isInitialLoad)) return;
+
+    setIsLoading(true);
+    try {
+      const response = await fetch(`/api/gallery?limit=${ITEMS_PER_PAGE}&cursor=${cursor ?? ''}`);
+      if (!response.ok) throw new Error('Failed to fetch images');
+
+      const data: GalleryResponse = await response.json();
+      
+      setImages(prevImages => [
+        ...prevImages,
+        ...data.blobs.map(blob => ({
+          src: blob.downloadUrl,
+          original: blob.downloadUrl,
+          layout: "fill",
+          objectFit: "contain",
+          caption: blob.pathname,
+        }))
+      ]);
+      setCursor(data.cursor);
+      setHasMore(data.hasMore);
+    } catch (error) {
+      console.error('Error fetching images:', error);
+    } finally {
       setIsLoading(false);
     }
-  };
+  }, [cursor, isLoading, hasMore]);
 
   useEffect(() => {
-    if (firstPrint) {
-      firstPrint = false;
-      fetchImages();
+    if (!initialLoadComplete.current) {
+      fetchImages(true);
+      initialLoadComplete.current = true;
     }
-  }, []);
+  }, [fetchImages]);
+
+  const handleLoadMore = () => {
+    fetchImages(false);
+  };
 
   return (
     <div className="image-gallery-container-div">
-      <ImageGallery images={allImages} />
+      <ImageGallery images={images} />
       {hasMore && (
         <div className="flex justify-center">
           <button
-            onClick={fetchImages}
+            onClick={handleLoadMore}
             disabled={isLoading}
             className="load-more-button"
           >
