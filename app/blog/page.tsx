@@ -4,6 +4,12 @@ import React, { useState, useEffect, useCallback } from "react";
 import { BlogPost } from "@/types/blog-post";
 import "../../styles/blog-home.css";
 
+const addUniquePost = (posts: BlogPost[], newPost: BlogPost) => {
+  if (!posts.some(post => post.id === newPost.id)) {
+    posts.push(newPost);
+  }
+};
+
 export default function Blog() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [page, setPage] = useState(1);
@@ -27,11 +33,7 @@ export default function Blog() {
           return newPosts;
         }
         const uniquePosts = [...prevPosts];
-        newPosts.forEach((newPost: BlogPost) => {
-          if (!uniquePosts.some(post => post.id === newPost.id)) {
-            uniquePosts.push(newPost);
-          }
-        });
+        newPosts.forEach((newPost: BlogPost) => addUniquePost(uniquePosts, newPost));
         return uniquePosts;
       });
 
@@ -46,7 +48,7 @@ export default function Blog() {
 
   useEffect(() => {
     getBlogPosts(1);
-  }, []); // Only run on mount
+  }, []); // empty dependency array to only run on mount, seems to be the only way to make it work.
 
   const handleLoadMore = () => {
     getBlogPosts(page);
