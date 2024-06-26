@@ -11,8 +11,49 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openSubmenus, setOpenSubmenus] = useState<Record<string, boolean>>({});
   const [isMainNavSticky, setIsMainNavSticky] = useState(false);
+  const [isMobileHeaderSticky, setIsMobileHeaderSticky] = useState(false);
 
   useEffect(() => {
+    const $mainNav = $(".main-nav");
+
+    function setupSubmenus() {
+      $mainNav.find("li").each(function () {
+        const $this = $(this);
+        const $link = $this.children("a");
+        const $submenu = $this.children("ul");
+
+        if ($submenu.length) {
+          // For desktop: mouseenter and mouseleave events
+          $this
+            .on("mouseenter", function () {
+              if (window.innerWidth > 768) {
+                $submenu.stop(true, true).fadeIn(300);
+              }
+            })
+            .on("mouseleave", function () {
+              if (window.innerWidth > 768) {
+                $submenu.stop(true, true).fadeOut(200);
+              }
+            });
+
+          // For mobile: toggle submenu on click
+          $link.on("click", function (e) {
+            if (window.innerWidth <= 768) {
+              e.preventDefault();
+              const index = $this.index();
+              setOpenSubmenus((prev) => ({
+                ...prev,
+                [index]: !prev[index],
+              }));
+            }
+          });
+        }
+      });
+    }
+
+    setupSubmenus();
+
+    // Update scroll event listener
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const mainBarHeight = $(".main-bar").outerHeight() || 0;
@@ -20,10 +61,12 @@ const Header = () => {
       const triggerPosition = topBarHeight + mainBarHeight;
 
       setIsMainNavSticky(scrollPosition > triggerPosition);
+      setIsMobileHeaderSticky(scrollPosition > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
 
+    // Clean up event listener
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -31,13 +74,6 @@ const Header = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const toggleSubmenu = (level: number, index: number) => {
-    setOpenSubmenus((prev) => ({
-      ...prev,
-      [`${level}-${index}`]: !prev[`${level}-${index}`],
-    }));
   };
 
   const renderMenuItems = (items: MenuItem[], level = 0) => {
@@ -49,9 +85,12 @@ const Header = () => {
             openSubmenus[`${level}-${index}`] ? "open" : ""
           }`}
           onClick={(e) => {
-            if (item.children) {
+            if (item.children && window.innerWidth <= 768) {
               e.preventDefault();
-              toggleSubmenu(level, index);
+              setOpenSubmenus((prev) => ({
+                ...prev,
+                [`${level}-${index}`]: !prev[`${level}-${index}`],
+              }));
             }
           }}
         >
@@ -208,15 +247,15 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="mobile-nav">
+      <div className={`mobile-nav ${isMobileHeaderSticky ? "sticky" : ""}`}>
         <div className="logo">
           <a href="/" className="navbar-href">
             <Image
               src="/Images/united-lives-new-logo-with-text-cropped-minimized-white.svg"
               alt="United Lives"
               width={100}
-              height={40}
-              style={{ width: "auto", height: "100%" }}
+              height={100}
+              style={{ width: "100%", height: "auto" }}
               priority
             />
           </a>
@@ -228,11 +267,7 @@ const Header = () => {
         </button>
       </div>
 
-      <nav
-        className={`main-nav ${isMobileMenuOpen ? "mobile-open" : ""} ${
-          isMainNavSticky ? "sticky" : ""
-        }`}
-      >
+      <nav className={`main-nav ${isMobileMenuOpen ? "mobile-open" : ""} ${isMainNavSticky ? "sticky" : ""}`}>
         <ul>{renderMenuItems(menuItems)}</ul>
         <div className="search-icon">
           <SearchComponent />
