@@ -228,7 +228,11 @@ const Header = () => {
         </button>
       </div>
 
-      <nav className={`main-nav ${isMobileMenuOpen ? "mobile-open" : ""} ${isMainNavSticky ? "sticky" : ""}`}>
+      <nav
+        className={`main-nav ${isMobileMenuOpen ? "mobile-open" : ""} ${
+          isMainNavSticky ? "sticky" : ""
+        }`}
+      >
         <ul>{renderMenuItems(menuItems)}</ul>
         <div className="search-icon">
           <SearchComponent />
