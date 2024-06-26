@@ -289,14 +289,14 @@ body {
 }
 
 /* Responsive Styles */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1185px) {
   .main-nav ul li a {
     padding: 15px 15px;
     font-size: 0.9rem;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1020px) {
   .top-bar,
   .main-bar {
     display: none;
@@ -308,6 +308,16 @@ body {
 
   .mobile-nav {
     display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .mobile-nav.sticky {
+    transform: translateY(0);
   }
 
   .main-nav {
@@ -375,5 +385,13 @@ body {
 
   .header {
     min-height: 80px;
+  }
+
+  .fl-row.fl-row-full-width {
+    margin-top: 80px;
+  }
+
+  .mobile-banner {
+    margin-top: 80px;
   }
 }

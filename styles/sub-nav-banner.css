@@ -67,7 +67,15 @@
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+.vertical-mobile-banner {
+  display: none;
+}
+
+@media screen and (max-width: 1020px) {
+  .vertical-mobile-banner {
+    display: none;
+  }
+
   .fl-row {
     display: none;
   }
@@ -76,7 +84,7 @@
     display: block;
     position: relative;
     width: 100%;
-    height: 30vh;
+    height: 50vh;
     overflow: hidden;
   }
 
@@ -86,7 +94,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/Images/x2.webp');
+    background-image: url("/Images/x2.webp");
     background-size: cover;
     background-position: center;
   }
@@ -105,6 +113,62 @@
 
   .mobile-banner .overlay-image img {
     max-width: 80%;
+    min-width: 60vw;
     height: auto;
+  }
+
+  .mobile-banner {
+    margin-top: 80px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .mobile-banner {
+    display: none;
+  }
+
+  .fl-row {
+    display: none;
+  }
+
+  .vertical-mobile-banner {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+  }
+
+  .vertical-mobile-banner .content-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/Images/x2.webp");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .vertical-mobile-banner .overlay-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .vertical-mobile-banner .overlay-image img {
+    max-width: 70%;
+    min-width: 55vw;
+    height: auto;
+  }
+
+  .vertical-mobile-banner {
+    margin-top: 80px;
   }
 }

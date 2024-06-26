@@ -46,6 +46,18 @@ const SubNavBanner: React.FC = () => {
           />
         </div>
       </div>
+      <div className="vertical-mobile-banner">
+        <div className="content-image"></div>
+        <div className="overlay-image">
+          <Image
+            src="/Images/extra-compact-cropper-mobile-overlay.svg"
+            alt="United Lives Mobile Banner"
+            width={158.799}
+            height={191.697}
+            layout="intrinsic"
+          />
+        </div>
+      </div>
     </>
   );
 };
