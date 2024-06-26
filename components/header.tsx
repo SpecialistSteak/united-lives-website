@@ -10,61 +10,34 @@ import { MenuItem } from "../types/menu-item";
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openSubmenus, setOpenSubmenus] = useState<Record<string, boolean>>({});
+  const [isMainNavSticky, setIsMainNavSticky] = useState(false);
 
   useEffect(() => {
-    const $mainNav = $(".main-nav");
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const mainBarHeight = $(".main-bar").outerHeight() || 0;
+      const topBarHeight = $(".top-bar").outerHeight() || 0;
+      const triggerPosition = topBarHeight + mainBarHeight;
 
-    function setupSubmenus() {
-      $mainNav.find("li").each(function () {
-        const $this = $(this);
-        const $link = $this.children("a");
-        const $submenu = $this.children("ul");
+      setIsMainNavSticky(scrollPosition > triggerPosition);
+    };
 
-        if ($submenu.length) {
-          // For desktop: mouseenter and mouseleave events
-          $this
-            .on("mouseenter", function () {
-              if (window.innerWidth > 768) {
-                $submenu.stop(true, true).fadeIn(300);
-              }
-            })
-            .on("mouseleave", function () {
-              if (window.innerWidth > 768) {
-                $submenu.stop(true, true).fadeOut(200);
-              }
-            });
+    window.addEventListener("scroll", handleScroll);
 
-          // For mobile: toggle submenu on click
-          $link.on("click", function (e) {
-            if (window.innerWidth <= 768) {
-              e.preventDefault();
-              const index = $this.index();
-              setOpenSubmenus((prev) => ({
-                ...prev,
-                [index]: !prev[index],
-              }));
-            }
-          });
-        }
-      });
-    }
-
-    setupSubmenus();
-
-    if (typeof window !== "undefined") {
-      window.triggerSearch = function () {
-        let searchTerm = prompt("Enter the text to search for:");
-        if (searchTerm) {
-          if (!window.find(searchTerm)) {
-            alert("No matches found.");
-          }
-        }
-      };
-    }
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const toggleSubmenu = (level: number, index: number) => {
+    setOpenSubmenus((prev) => ({
+      ...prev,
+      [`${level}-${index}`]: !prev[`${level}-${index}`],
+    }));
   };
 
   const renderMenuItems = (items: MenuItem[], level = 0) => {
@@ -76,12 +49,9 @@ const Header = () => {
             openSubmenus[`${level}-${index}`] ? "open" : ""
           }`}
           onClick={(e) => {
-            if (item.children && window.innerWidth <= 768) {
+            if (item.children) {
               e.preventDefault();
-              setOpenSubmenus((prev) => ({
-                ...prev,
-                [`${level}-${index}`]: !prev[`${level}-${index}`],
-              }));
+              toggleSubmenu(level, index);
             }
           }}
         >
@@ -245,8 +215,8 @@ const Header = () => {
               src="/Images/united-lives-new-logo-with-text-cropped-minimized-white.svg"
               alt="United Lives"
               width={100}
-              height={100}
-              style={{ width: "100%", height: "auto" }}
+              height={40}
+              style={{ width: "auto", height: "100%" }}
               priority
             />
           </a>
@@ -258,7 +228,7 @@ const Header = () => {
         </button>
       </div>
 
-      <nav className={`main-nav ${isMobileMenuOpen ? "mobile-open" : ""}`}>
+      <nav className={`main-nav ${isMobileMenuOpen ? "mobile-open" : ""} ${isMainNavSticky ? "sticky" : ""}`}>
         <ul>{renderMenuItems(menuItems)}</ul>
         <div className="search-icon">
           <SearchComponent />
