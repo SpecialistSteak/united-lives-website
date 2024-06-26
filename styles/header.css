@@ -372,4 +372,8 @@ body {
   .main-nav ul li > a.open::after {
     transform: rotate(180deg);
   }
+
+  .header {
+    min-height: 80px;
+  }
 }
