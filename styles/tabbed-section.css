@@ -1,0 +1,115 @@
+:root {
+  --primary-dark: #0d1f33;
+  --primary-medium: #152f4f;
+  --primary-light: #1c3f68;
+  --accent-color: #4180cb;
+  --highlight-color: #d9c96d;
+  --highlight-color-dark: #b3a357;
+  --text-light: #ffffff;
+  --text-muted: #e0e0e0;
+  --background-color: #f9f9f9;
+}
+
+.ul-tabbed-section {
+  margin-bottom: 40px;
+}
+
+.ul-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.ul-tab {
+  background-color: transparent;
+  border: none;
+  outline: none !important;
+  color: var(--primary-medium);
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: 600;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.ul-tab::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background-color: var(--highlight-color-dark);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.ul-tab:hover,
+.ul-tab.active {
+  border: none;
+  color: var(--highlight-color-dark);
+}
+
+.ul-tab.active::after {
+  width: 100%;
+}
+
+.ul-tab-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ul-tab-content h3 {
+  color: var(--primary-dark);
+  font-size: 1.8em;
+  margin-bottom: 15px;
+}
+
+.ul-tab-content p {
+  color: var(--primary-medium);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .ul-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ul-tab {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .ul-tab::after {
+    bottom: 0;
+    left: 0;
+    transform: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ul-tab-content {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.ul-button.tabbed-section-button {
+  background-color: var(--accent-color);
+  color: var(--text-light);
+}
+
+.ul-button.tabbed-section-button:hover {
+  background-color: #3669a3;
+}
