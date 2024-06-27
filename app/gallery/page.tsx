@@ -8,7 +8,6 @@ import { GalleryResponse } from "@/types/gallery-response";
 import { CustomImage } from "@/types/image-gallery";
 import "@/styles/gallery.css";
 
-
 const ITEMS_PER_PAGE = 10;
 
 export default function GalleryPage() {

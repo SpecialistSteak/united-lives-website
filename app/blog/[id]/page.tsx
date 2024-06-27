@@ -1,8 +1,9 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BlogPost } from "@/types/blog-post";
 import "../../../styles/blog-id-page.css";
+import LoadingComponent from "@/components/LoadingComponent";
 
 export default function BlogPostPage({
   params,
@@ -41,42 +42,59 @@ export default function BlogPostPage({
   // Function to parse and render allowed HTML tags
   const renderContent = (content: string) => {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(content, 'text/html');
-    
-    const renderNode = (node: Node): React.ReactNode => {
+    const doc = parser.parseFromString(content, "text/html");
+
+    const renderNode = (node: Node, index: number): React.ReactNode => {
       if (node.nodeType === Node.TEXT_NODE) {
         return node.textContent;
       }
       if (node.nodeType === Node.ELEMENT_NODE) {
         const element = node as Element;
-        const children = Array.from(element.childNodes).map(renderNode);
-        
+        const children = Array.from(element.childNodes).map((child, i) =>
+          renderNode(child, i)
+        );
+
         switch (element.tagName.toLowerCase()) {
-          case 'b':
-          case 'strong':
-            return <strong key={Math.random()}>{children}</strong>;
-          case 'i':
-          case 'em':
-            return <em key={Math.random()}>{children}</em>;
-          case 'a':
-            return <a key={Math.random()} href={element.getAttribute('href') || '#'} target="_blank" rel="noopener noreferrer">{children}</a>;
+          case "b":
+          case "strong":
+            return (
+              <strong key={`${element.tagName}-${index}`}>{children}</strong>
+            );
+          case "i":
+          case "em":
+            return <em key={`${element.tagName}-${index}`}>{children}</em>;
+          case "a":
+            return (
+              <a
+                key={`${element.tagName}-${index}`}
+                href={element.getAttribute("href") ?? "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {children}
+              </a>
+            );
           default:
-            return <>{children}</>;
+            return (
+              <React.Fragment key={`fragment-${index}`}>
+                {children}
+              </React.Fragment>
+            );
         }
       }
       return null;
     };
 
-    return <>{Array.from(doc.body.childNodes).map(renderNode)}</>;
+    return (
+      <>
+        {Array.from(doc.body.childNodes).map((node, index) =>
+          renderNode(node, index)
+        )}
+      </>
+    );
   };
 
-  if (loading)
-    return (
-      <div className="loading-container">
-        <Image src="/images/loading.gif" alt="Loading..." width={50} height={50} />
-        <p>Loading...</p>
-      </div>
-    );
+  if (loading) return <LoadingComponent />;
 
   if (error)
     return (
@@ -112,9 +130,7 @@ export default function BlogPostPage({
         </div>
       </div>
       <hr className="separator" />
-      <div className="post-content">
-        {renderContent(post.content)}
-      </div>
+      <div className="post-content">{renderContent(post.content)}</div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import SubNavBanner from "@/components/sub-nav-banner";
 import TabbedSection from "@/components/tabbed-section";
+import Image from "next/image";
 import "@/styles/main-page.css";
 
 export default function Home() {
@@ -38,10 +39,12 @@ export default function Home() {
             </h2>
             <div className="ul-impact-grid">
               <div className="ul-impact-card">
-                <img
+                <Image
                   src="https://etrlcrutldimhgcd.public.blob.vercel-storage.com/III-2GpvISRBtmEEbFMRhZHMZVzQWhSGAM.jpeg"
                   alt="Community Advocacy"
                   className="ul-impact-image"
+                  width={640}
+                  height={360}
                 />
                 <h3>Community Advocacy</h3>
                 <p>
@@ -50,10 +53,12 @@ export default function Home() {
                 </p>
               </div>
               <div className="ul-impact-card">
-                <img
+                <Image
                   src="https://etrlcrutldimhgcd.public.blob.vercel-storage.com/B-bb12jniGEbow0DXjwVx4jDk1Uk7cLY.jpeg"
                   alt="Cultural Preservation"
                   className="ul-impact-image"
+                  width={385}
+                  height={385}
                 />
                 <h3>Cultural Preservation</h3>
                 <p>
@@ -62,10 +67,12 @@ export default function Home() {
                 </p>
               </div>
               <div className="ul-impact-card">
-                <img
+                <Image
                   src="https://etrlcrutldimhgcd.public.blob.vercel-storage.com/T-4gWv2cqbv2RGtNjHwlrA2BDrbS4uE6.jpeg"
                   alt="Legal Support"
                   className="ul-impact-image"
+                  width={432}
+                  height={576}
                 />
                 <h3>Legal Support</h3>
                 <p>
@@ -118,10 +125,12 @@ export default function Home() {
             <h2 className="ul-section-title">Latest News</h2>
             <div className="ul-news-grid">
               <div className="ul-news-card">
-                <img
+                <Image
                   src="https://etrlcrutldimhgcd.public.blob.vercel-storage.com/III-2GpvISRBtmEEbFMRhZHMZVzQWhSGAM.jpeg"
                   alt="News 1"
                   className="ul-news-image"
+                  width={300}
+                  height={265}
                 />
                 <div className="ul-news-content">
                   <p className="ul-news-date">18 June 2024</p>
@@ -134,10 +143,12 @@ export default function Home() {
                 </div>
               </div>
               <div className="ul-news-card">
-                <img
+                <Image
                   src="https://etrlcrutldimhgcd.public.blob.vercel-storage.com/B-bb12jniGEbow0DXjwVx4jDk1Uk7cLY.jpeg"
                   alt="News 2"
                   className="ul-news-image"
+                  width={300}
+                  height={265}
                 />
                 <div className="ul-news-content">
                   <p className="ul-news-date">14 May 2024</p>
@@ -151,10 +162,12 @@ export default function Home() {
                 </div>
               </div>
               <div className="ul-news-card">
-                <img
+                <Image
                   src="https://etrlcrutldimhgcd.public.blob.vercel-storage.com/T-4gWv2cqbv2RGtNjHwlrA2BDrbS4uE6.jpeg"
                   alt="News 3"
                   className="ul-news-image"
+                  width={300}
+                  height={265}
                 />
                 <div className="ul-news-content">
                   <p className="ul-news-date">26 April 2024</p>

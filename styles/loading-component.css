@@ -1,0 +1,12 @@
+.loading-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 40vh;
+}
+.loading-component p {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #333;
+}

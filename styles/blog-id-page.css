@@ -1,5 +1,11 @@
 :root {
+  --primary-dark: #0d1f33;
+  --primary-medium: #152f4f;
+  --primary-light: #1c3f68;
+  --accent-color: #4180cb;
+  --highlight-color: #d9c96d;
   --text-color: #333;
+  --text-muted: #666;
   --background-color: #f9f9f9;
   --card-background: #ffffff;
 }
@@ -7,27 +13,28 @@
 body {
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 0;
 }
 
 .post-container {
-  max-width: 85vw;
-  margin: 108px 7.5vw 60px;
-  padding: 60px;
+  width: 72vw;
+  margin: 80px auto 60px;
+  padding: 40px;
   background-color: var(--card-background);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 .post-title {
-  font-size: 2.5em;
-  color: var(--text-color);
+  font-size: 2.2em;
+  color: var(--primary-dark);
   text-align: left;
-  margin-bottom: 30px;
-  line-height: 1.2;
+  margin-bottom: 20px;
+  line-height: 1.3;
   font-weight: 700;
 }
 
@@ -37,98 +44,101 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: 40px;
 }
 
 .tags-container {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 20px;
 }
 
 .tags-label {
-  color: #333;
-  margin-right: 10px;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .tag {
   display: inline-block;
-  margin-left: 5px;
+  margin: 3px;
   padding: 5px 10px;
-  background-color: #f0f0f0;
-  border-radius: 20px;
-  transition: background-color 0.3s;
-  font-size: 0.8em;
-  color: #333;
+  background-color: var(--primary-light);
+  color: var(--text-light);
+  border-radius: 18px;
+  transition: all 0.3s;
+  font-size: 0.75em;
+  font-weight: 500;
 }
 
 .tag:hover {
-  background-color: #e0e0f0;
+  background-color: var(--accent-color);
+  transform: translateY(-2px);
 }
 
 .published-container {
-  color: #666;
+  color: var(--text-muted);
   font-style: italic;
+  font-size: 0.9em;
 }
 
 .separator {
   border: 0;
   height: 1px;
   background: #e0e0e0;
-  margin: 40px 0;
+  margin: 30px 0;
 }
 
 .post-content {
   color: var(--text-color);
   line-height: 1.8;
-  font-size: 1.1em;
+  font-size: 1.05em;
 }
 
 .post-content p {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .post-content a {
-  color: #0066cc;
+  color: var(--accent-color);
   text-decoration: none;
-  border-bottom: 1px solid #0066cc;
+  border-bottom: 1px solid var(--accent-color);
   transition: border-bottom 0.3s;
 }
 
 .post-content a:hover {
-  border-bottom: 2px solid #0066cc;
+  border-bottom: 2px solid var(--accent-color);
 }
 
-.post-content h2, .post-content h3 {
-  margin-top: 40px;
-  margin-bottom: 20px;
-  color: var(--text-color);
+.post-content h2,
+.post-content h3 {
+  margin-top: 35px;
+  margin-bottom: 15px;
+  color: var(--primary-dark);
 }
 
 .post-content h2 {
-  font-size: 1.8em;
+  font-size: 1.6em;
 }
 
 .post-content h3 {
-  font-size: 1.5em;
+  font-size: 1.4em;
 }
 
-.post-content ul, .post-content ol {
-  margin-bottom: 25px;
-  padding-left: 30px;
+.post-content ul,
+.post-content ol {
+  margin-bottom: 20px;
+  padding-left: 25px;
 }
 
 .post-content li {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .post-content blockquote {
-  border-left: 4px solid #0066cc;
+  border-left: 4px solid var(--accent-color);
   padding-left: 20px;
-  margin: 30px 0;
+  margin: 25px 0;
   font-style: italic;
-  color: #555;
+  color: var(--text-muted);
 }
 
 .loading-container,
@@ -146,20 +156,20 @@ body {
 .loading-container img,
 .error-container img,
 .no-post-container img {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 30px;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
 }
 
 @media (max-width: 768px) {
   .post-container {
     max-width: 90vw;
-    padding: 30px;
-    margin: 20px 5vw;
+    padding: 25px;
+    margin: 60px auto 40px;
   }
 
   .post-title {
-    font-size: 2em;
+    font-size: 1.8em;
   }
 
   .post-content {

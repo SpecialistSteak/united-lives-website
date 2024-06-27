@@ -3,9 +3,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { BlogPost } from "@/types/blog-post";
 import "../../styles/blog-home.css";
+import LoadingComponent from "@/components/LoadingComponent";
 
 const addUniquePost = (posts: BlogPost[], newPost: BlogPost) => {
-  if (!posts.some(post => post.id === newPost.id)) {
+  if (!posts.some((post) => post.id === newPost.id)) {
     posts.push(newPost);
   }
 };
@@ -13,46 +14,53 @@ const addUniquePost = (posts: BlogPost[], newPost: BlogPost) => {
 export default function Blog() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
 
-  const getBlogPosts = useCallback(async (pageNumber: number) => {
-    if (loading || (!hasMore && pageNumber !== 1)) return;
-    setLoading(true);
-    try {
-      const response = await fetch(`/api/blog?page=${pageNumber}&limit=10`);
-      const data = await response.json();
+  const getBlogPosts = useCallback(
+    async (pageNumber: number) => {
+      if (!hasMore && pageNumber !== 1) return;
+      setLoading(true);
+      try {
+        const response = await fetch(`/api/blog?page=${pageNumber}&limit=10`);
+        const data = await response.json();
 
-      const newPosts = data.map((post: any) => ({
-        ...post,
-        createdAt: post.createdAt ? new Date(post.createdAt) : new Date(),
-      }));
+        const newPosts = data.map((post: any) => ({
+          ...post,
+          createdAt: post.createdAt ? new Date(post.createdAt) : new Date(),
+        }));
 
-      setBlogPosts(prevPosts => {
-        if (pageNumber === 1) {
-          return newPosts;
-        }
-        const uniquePosts = [...prevPosts];
-        newPosts.forEach((newPost: BlogPost) => addUniquePost(uniquePosts, newPost));
-        return uniquePosts;
-      });
+        setBlogPosts((prevPosts) => {
+          if (pageNumber === 1) {
+            return newPosts;
+          }
+          const uniquePosts = [...prevPosts];
+          newPosts.forEach((newPost: BlogPost) =>
+            addUniquePost(uniquePosts, newPost)
+          );
+          return uniquePosts;
+        });
 
-      setHasMore(newPosts.length === 10);
-      setPage(pageNumber + 1);
-    } catch (error) {
-      console.error("Error fetching blog posts:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, [loading, hasMore]);
+        setHasMore(newPosts.length === 10);
+        setPage(pageNumber + 1);
+      } catch (error) {
+        console.error("Error fetching blog posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [hasMore]
+  );
 
   useEffect(() => {
     getBlogPosts(1);
-  }, []); // empty dependency array to only run on mount, seems to be the only way to make it work.
+  }, [getBlogPosts]);
 
   const handleLoadMore = () => {
     getBlogPosts(page);
   };
+
+  if (loading && blogPosts.length === 0) return <LoadingComponent />;
 
   return (
     <div className="blog-outer-container">
@@ -88,8 +96,12 @@ export default function Blog() {
         ))}
       </div>
       {hasMore && (
-        <button onClick={handleLoadMore} className="load-more-button" disabled={loading}>
-          {loading ? 'Loading...' : 'Load More'}
+        <button
+          onClick={handleLoadMore}
+          className="load-more-button"
+          disabled={loading}
+        >
+          {loading ? "Loading..." : "Load More"}
         </button>
       )}
     </div>

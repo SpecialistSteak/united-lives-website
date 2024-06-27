@@ -111,6 +111,7 @@ const Header = () => {
 
   const menuItems = [
     { label: "Home", href: "/" },
+    { label: "News", href: "/blog" },
     { label: "Gallery", href: "/gallery" },
     {
       label: "About Us",
@@ -193,8 +194,7 @@ const Header = () => {
           ],
         },
       ],
-    },
-    { label: "News", href: "/blog" },
+    }
   ];
 
   return (
