@@ -1,8 +1,8 @@
 import React from "react";
-import SubNavBanner from "@/components/sub-nav-banner";
-import TabbedSection from "@/components/tabbed-section";
 import Image from "next/image";
 import "@/styles/main-page.css";
+import TabbedSection from "@/components/tabbed-section";
+import SubNavBanner from "@/components/sub-nav-banner";
 
 export default function Home() {
   return (

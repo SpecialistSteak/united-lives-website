@@ -64,7 +64,7 @@ body {
 .top-bar nav ul li a {
   color: var(--text-muted);
   font-size: 0.9rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .top-bar nav ul li a:hover {
@@ -178,7 +178,6 @@ body {
 
 .main-nav ul ul li a {
   padding: 12px 20px;
-  color: var(--text-muted);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 

@@ -2,14 +2,8 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { BlogPost } from "@/types/blog-post";
-import "../../styles/blog-home.css";
+import "@/styles/blog-home.css";
 import LoadingComponent from "@/components/LoadingComponent";
-
-const addUniquePost = (posts: BlogPost[], newPost: BlogPost) => {
-  if (!posts.some((post) => post.id === newPost.id)) {
-    posts.push(newPost);
-  }
-};
 
 export default function Blog() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
@@ -17,93 +11,90 @@ export default function Blog() {
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
 
-  const getBlogPosts = useCallback(
-    async (pageNumber: number) => {
-      if (!hasMore && pageNumber !== 1) return;
-      setLoading(true);
-      try {
-        const response = await fetch(`/api/blog?page=${pageNumber}&limit=10`);
-        const data = await response.json();
+  const getBlogPosts = useCallback(async (pageNumber: number) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/blog?page=${pageNumber}&limit=10`);
+      const data = await response.json();
 
-        const newPosts = data.map((post: any) => ({
-          ...post,
-          createdAt: post.createdAt ? new Date(post.createdAt) : new Date(),
-        }));
+      const newPosts = data.map((post: any) => ({
+        ...post,
+        createdAt: post.createdAt ? new Date(post.createdAt) : new Date(),
+      }));
 
-        setBlogPosts((prevPosts) => {
-          if (pageNumber === 1) {
-            return newPosts;
-          }
-          const uniquePosts = [...prevPosts];
-          newPosts.forEach((newPost: BlogPost) =>
-            addUniquePost(uniquePosts, newPost)
-          );
-          return uniquePosts;
-        });
-
-        setHasMore(newPosts.length === 10);
-        setPage(pageNumber + 1);
-      } catch (error) {
-        console.error("Error fetching blog posts:", error);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [hasMore]
-  );
+      setBlogPosts(newPosts);
+      setHasMore(newPosts.length === 10);
+    } catch (error) {
+      console.error("Error fetching blog posts:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    getBlogPosts(1);
-  }, [getBlogPosts]);
-
-  const handleLoadMore = () => {
     getBlogPosts(page);
+  }, [getBlogPosts, page]);
+
+  const handlePrevious = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
   };
 
-  if (loading && blogPosts.length === 0) return <LoadingComponent />;
+  const handleNext = () => {
+    if (hasMore) {
+      setPage(page + 1);
+    }
+  };
 
   return (
     <div className="blog-outer-container">
       <h1>Blog</h1>
-      <div className="blog-container">
-        {blogPosts.map((post, index) => (
-          <div
-            key={post.id}
-            className="blog-post"
-            style={{ animationDelay: `${index * 0.1}s` }}
-          >
-            <h2>
-              <a href={`/blog/${post.id}`}>{post.title}</a>
-            </h2>
-            <p className="blog-content">
-              {post.content.split(" ").slice(0, 60).join(" ")}...
-            </p>
-            <div className="tags">
-              {post.tags.map((tag: string) => (
-                <span key={`${post.id}-${tag}`} className="tag">
-                  {tag}
-                </span>
-              ))}
+      {loading ? (
+        <LoadingComponent />
+      ) : (
+        <div className="blog-container">
+          {blogPosts.map((post, index) => (
+            <div
+              key={post.id}
+              className="blog-post"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <h2>
+                <a href={`/blog/${post.id}`}>{post.title}</a>
+              </h2>
+              <p className="blog-content">
+                {post.content.split(" ").slice(0, 60).join(" ")}...
+              </p>
+              <div className="tags">
+                {post.tags.map((tag: string) => (
+                  <span key={`${post.id}-${tag}`} className="tag">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <p className="created-at">
+                Created At:{" "}
+                {post.createdAt instanceof Date &&
+                !isNaN(post.createdAt.valueOf())
+                  ? post.createdAt.toLocaleDateString()
+                  : "Unknown"}
+              </p>
             </div>
-            <p className="created-at">
-              Created At:{" "}
-              {post.createdAt instanceof Date &&
-              !isNaN(post.createdAt.valueOf())
-                ? post.createdAt.toLocaleDateString()
-                : "Unknown"}
-            </p>
-          </div>
-        ))}
-      </div>
-      {hasMore && (
-        <button
-          onClick={handleLoadMore}
-          className="load-more-button"
-          disabled={loading}
-        >
-          {loading ? "Loading..." : "Load More"}
-        </button>
+          ))}
+        </div>
       )}
+      <div className="pagination-container">
+        <div className="pagination-buttons">
+          <button onClick={handlePrevious} disabled={page === 1 || loading}>
+            Previous
+          </button>
+          <span>Page {page}</span>
+          <button onClick={handleNext} disabled={!hasMore || loading}>
+            Next
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
