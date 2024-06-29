@@ -1,5 +1,13 @@
+// types/gallery-response.ts
+
+export interface Blob {
+  downloadUrl: string;
+  pathname: string;
+  uploadedAt: string;
+}
+
 export interface GalleryResponse {
-  blobs: Array<{ downloadUrl: string; pathname: string }>;
-  cursor: string;
-  hasMore: boolean;
+  blobs: Blob[];
+  currentPage: number;
+  totalPages: number;
 }

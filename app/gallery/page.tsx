@@ -1,66 +1,67 @@
-// app/gallery/page.tsx
-
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback } from "react";
 import ImageGallery from "@/components/image-gallery";
-import { GalleryResponse } from "@/types/gallery-response";
+import { GalleryResponse, Blob } from "@/types/gallery-response";
 import { CustomImage } from "@/types/image-gallery";
+import LoadingComponent from "@/components/LoadingComponent";
 import "@/styles/gallery.css";
-
-const ITEMS_PER_PAGE = 10;
 
 export default function GalleryPage() {
   const [images, setImages] = useState<CustomImage[]>([]);
-  const [cursor, setCursor] = useState<string | undefined>(undefined);
-  const [hasMore, setHasMore] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const initialLoadComplete = useRef(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
-  const fetchImages = useCallback(async (isInitialLoad: boolean) => {
-    if (isLoading || (!hasMore && !isInitialLoad)) return;
+  const fetchImages = useCallback(
+    async (page: number) => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`/api/gallery?page=${page}`);
+        if (!response.ok) throw new Error("Failed to fetch images");
 
-    setIsLoading(true);
-    try {
-      const response = await fetch(`/api/gallery?limit=${ITEMS_PER_PAGE}&cursor=${cursor ?? ''}`);
-      if (!response.ok) throw new Error('Failed to fetch images');
+        const data: GalleryResponse = await response.json();
 
-      const data: GalleryResponse = await response.json();
-      
-      setImages(prevImages => [
-        ...prevImages,
-        ...data.blobs.map(blob => ({
+        const newImages: CustomImage[] = data.blobs.map((blob: Blob) => ({
           src: blob.downloadUrl,
           original: blob.downloadUrl,
           layout: "fill",
           objectFit: "contain",
           caption: blob.pathname,
-        }))
-      ]);
-      setCursor(data.cursor);
-      setHasMore(data.hasMore);
-    } catch (error) {
-      console.error('Error fetching images:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [cursor, isLoading, hasMore]);
+        }));
+
+        setImages((prevImages) =>
+          isInitialLoad ? newImages : [...prevImages, ...newImages]
+        );
+        setCurrentPage(data.currentPage);
+        setTotalPages(data.totalPages);
+        if (isInitialLoad) setIsInitialLoad(false);
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [isInitialLoad]
+  );
 
   useEffect(() => {
-    if (!initialLoadComplete.current) {
-      fetchImages(true);
-      initialLoadComplete.current = true;
-    }
+    fetchImages(1);
   }, [fetchImages]);
 
   const handleLoadMore = () => {
-    fetchImages(false);
+    if (currentPage < totalPages) {
+      fetchImages(currentPage + 1);
+    }
   };
+
+  if (isLoading && images.length === 0) return <LoadingComponent />;
 
   return (
     <div className="image-gallery-container-div">
       <ImageGallery images={images} />
-      {hasMore && (
+      {currentPage < totalPages && (
         <div className="flex justify-center">
           <button
             onClick={handleLoadMore}
