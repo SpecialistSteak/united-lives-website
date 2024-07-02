@@ -5,6 +5,7 @@
   --accent-color: #4180cb;
   --highlight-color: #d9c96d;
   --text-color: #333;
+  --text-light: #fff;
   --text-muted: #666;
   --background-color: #f9f9f9;
   --card-background: #ffffff;
@@ -50,11 +51,9 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-}
-
-.tags-label {
   margin-top: 25px;
   margin-bottom: 25px;
+
 }
 
 .tag {
@@ -161,7 +160,7 @@ body {
   margin-bottom: 20px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1020px) {
   .post-container {
     max-width: 90vw;
     padding: 25px;
@@ -174,5 +173,9 @@ body {
 
   .post-content {
     font-size: 1em;
+  }
+
+  body {
+    padding-top: 80px; /* Adjust this value based on your mobile header height */
   }
 }

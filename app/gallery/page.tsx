@@ -12,7 +12,17 @@ export default function GalleryPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [rowHeight, setRowHeight] = useState(360);
+
+  useEffect(() => {
+    const updateRowHeight = () => {
+      setRowHeight(window.innerWidth <= 768 ? 200 : 360);
+    };
+    
+    updateRowHeight();
+    window.addEventListener('resize', updateRowHeight);
+    return () => window.removeEventListener('resize', updateRowHeight);
+  }, []);
 
   const fetchImages = useCallback(
     async (page: number) => {
@@ -32,18 +42,17 @@ export default function GalleryPage() {
         }));
 
         setImages((prevImages) =>
-          isInitialLoad ? newImages : [...prevImages, ...newImages]
+          page === 1 ? newImages : [...prevImages, ...newImages]
         );
         setCurrentPage(data.currentPage);
         setTotalPages(data.totalPages);
-        if (isInitialLoad) setIsInitialLoad(false);
       } catch (error) {
         console.error("Error fetching images:", error);
       } finally {
         setIsLoading(false);
       }
     },
-    [isInitialLoad]
+    []
   );
 
   useEffect(() => {
@@ -60,7 +69,7 @@ export default function GalleryPage() {
 
   return (
     <div className="image-gallery-container-div">
-      <ImageGallery images={images} />
+      <ImageGallery images={images} rowHeight={rowHeight} />
       {currentPage < totalPages && (
         <div className="flex justify-center">
           <button

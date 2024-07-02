@@ -1,25 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Gallery } from "react-grid-gallery";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { CustomImage } from "../types/image-gallery";
 
-// EXAMPLE IMAGE
-// const images: CustomImage[] = [
-  // {
-    // src: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
-    // original: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
-    // width: 320,
-    // height: 174,
-    // caption: "After Rain (Jeshu John - designerspics.com)",
-  // },
-// ];
-
-export default function ImageGallery({ images }: { images: CustomImage[] }) {
+export default function ImageGallery({ images, rowHeight }: { images: CustomImage[], rowHeight: number }) {
   const [index, setIndex] = useState(-1);
   const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => { 
+      // we are checking this because Lightbox css is not working on mobile. I also wasn't able to find a way to make the lightbox responsive.
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const currentImage = images[index];
   const nextIndex = (index + 1) % images.length;
@@ -28,8 +28,10 @@ export default function ImageGallery({ images }: { images: CustomImage[] }) {
   const prevImage = images[prevIndex] || currentImage;
 
   const handleClick = (index: number, item: CustomImage) => {
-    setIndex(index);
-    setLoading(true);
+    if (!isMobile) {
+      setIndex(index);
+      setLoading(true);
+    }
   };
 
   const handleClose = () => {
@@ -60,7 +62,7 @@ export default function ImageGallery({ images }: { images: CustomImage[] }) {
           height: typeof img.height === 'number' ? img.height : 0, // Ensuring height is a number
           caption: img.caption
         }))}
-        rowHeight={360}
+        rowHeight={rowHeight}
         margin={4}
         onClick={(index: number) => handleClick(index, images[index])}
         enableImageSelection={false}

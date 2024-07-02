@@ -16,6 +16,7 @@ const Header = () => {
   useEffect(() => {
     const $mainNav = $(".main-nav");
 
+    // Setup submenus
     function setupSubmenus() {
       $mainNav.find("li").each(function () {
         const $this = $(this);
@@ -25,12 +26,14 @@ const Header = () => {
         if ($submenu.length) {
           // For desktop: mouseenter and mouseleave events
           $this
-            .on("mouseenter", function () {
+            .on("mouseenter", function () { 
+              // Only show submenu on desktop
               if (window.innerWidth > 768) {
                 $submenu.stop(true, true).fadeIn(300);
               }
             })
             .on("mouseleave", function () {
+              // hide submenu on desktop
               if (window.innerWidth > 768) {
                 $submenu.stop(true, true).fadeOut(200);
               }
@@ -38,6 +41,7 @@ const Header = () => {
 
           // For mobile: toggle submenu on click
           $link.on("click", function (e) {
+            // toggle submenu on mobile
             if (window.innerWidth <= 768) {
               e.preventDefault();
               const index = $this.index();
