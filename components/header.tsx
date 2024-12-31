@@ -174,7 +174,6 @@ const Header = () => {
           children: [
             { label: "Kotupuram Colony", href: "#" },
             { label: "Cultural Heritage", href: "#" },
-            { label: "Community Stories", href: "#" },
           ],
         },
         {
@@ -182,9 +181,7 @@ const Header = () => {
           href: "#",
           children: [
             { label: "Tamil", href: "#" },
-            { label: "Local Dialects", href: "#" },
             { label: "Community Languages", href: "#" },
-            { label: "Language Preservation", href: "#" },
           ],
         },
       ],

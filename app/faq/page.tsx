@@ -20,7 +20,7 @@ const FAQPage: React.FC = () => {
     {
       question: "Who are the Roma people?",
       answer:
-        "The Roma people, also known as Romani, are an ethnic group with origins in the Indian subcontinent. They have a rich cultural heritage and have faced historical and ongoing discrimination in various parts of the world. In India, they are a vibrant part of the diverse social fabric.",
+        "The Roma people, also known as Romani, are an ethnic group with origins in the Indian subcontinent. They have a rich cultural heritage and have faced historical and ongoing discrimination in various parts of the world.",
     },
     {
       question: "What are some of the challenges faced by Roma communities in India?",
@@ -40,7 +40,7 @@ const FAQPage: React.FC = () => {
     {
       question: "How does United Lives ensure the effectiveness of its programs?",
       answer:
-        "We work closely with the Roma communities to understand their needs and priorities. Our programs are designed to be culturally sensitive, sustainable, and impactful. We regularly monitor and evaluate our work to ensure we are achieving our goals and making a positive difference.",
+        "We work closely with the Roma communities to understand their needs and priorities. We aim to be culturally sensitive, sustainable, and impactful. We regularly monitor and evaluate our work to ensure we are achieving our goals and making a positive difference.",
     },
     {
       question: "Can I learn more about specific projects undertaken by United Lives?",
