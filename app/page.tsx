@@ -1,10 +1,23 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
-import "@/styles/main-page.css";
+import "@/styles/main-page.css"; // Make sure this path is correct
 import TabbedSection from "@/components/tabbed-section";
 import SubNavBanner from "@/components/sub-nav-banner";
 
 export default function Home() {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleDonateClick = () => {
+    setShowPopup(true);
+
+    // Automatically hide the popup after 3 seconds (adjust as needed)
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
+  };
+
   return (
     <>
       <SubNavBanner />
@@ -12,18 +25,44 @@ export default function Home() {
         <section className="ul-hero">
           <div className="ul-container">
             <h1 className="ul-hero-title">
-              Empowering Gypsy Communities Across India
+              Empowering Roma Communities Across India
             </h1>
             <p className="ul-hero-text">
-              United Lives is dedicated to protecting the rights of Gypsy
+              United Lives is dedicated to protecting the rights of Roma
               people, securing their legal rights, and fostering equality for
-              the Gypsy people.
+              the Roma people.
             </p>
-            <a href="#" className="ul-button ul-button-primary">
+            <button
+              onClick={handleDonateClick}
+              className="ul-button ul-button-primary"
+            >
               Donate Now
-            </a>
+            </button>
           </div>
         </section>
+
+        {/* Popup Message */}
+        {showPopup && (
+          <div
+            style={{
+              position: "fixed",
+              bottom: "20px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              backgroundColor: "#fff", // Solid white background
+              padding: "15px 25px",
+              borderRadius: "5px",
+              boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
+              zIndex: 1000,
+              textAlign: "center",
+            }}
+          >
+            <p style={{ margin: 0, color: "black" }}>
+              We are currently working out a bank account with the Indian
+              government. Please contact us to donate in the meantime.
+            </p>
+          </div>
+        )}
 
         <section className="ul-mission">
           <div className="ul-container">
@@ -63,7 +102,7 @@ export default function Home() {
                 <h3>Cultural Preservation</h3>
                 <p>
                   Preserving and celebrating the rich cultural heritage of the
-                  Gypsy people.
+                  Roma people.
                 </p>
               </div>
               <div className="ul-impact-card">
@@ -104,7 +143,7 @@ export default function Home() {
                   Join our team of dedicated volunteers and make a direct impact
                   in our communities.
                 </p>
-                <a href="/volunteer" className="ul-button">
+                <a href="/contact" className="ul-button">
                   Volunteer
                 </a>
               </div>
@@ -122,60 +161,70 @@ export default function Home() {
 
         <section className="ul-news">
           <div className="ul-container">
-            <h2 className="ul-section-title">Latest News</h2>
+            <h2 className="ul-section-title">Important News</h2>
             <div className="ul-news-grid">
               <div className="ul-news-card">
                 <Image
-                  src="https://etrlcrutldimhgcd.public.blob.vercel-storage.com/III-2GpvISRBtmEEbFMRhZHMZVzQWhSGAM.jpeg"
+                  src="/Images/news1.jpg"
                   alt="News 1"
                   className="ul-news-image"
                   width={300}
                   height={265}
                 />
                 <div className="ul-news-content">
-                  <p className="ul-news-date">18 June 2024</p>
+                  <p className="ul-news-date">20 April 2023</p>
                   <h3>
-                    Landmark Victory: High Court Ruling Protects Gypsy Rights
+                    Govt to build memorial for Roma migrants to Europe who trace
+                    roots to India
                   </h3>
-                  <a href="#" className="ul-button">
+                  <a
+                    href="https://www.indianarrative.com/world-news/govt-to-build-memorial-for-roma-migrants-to-europe-who-trace-roots-to-india-133992.html"
+                    className="ul-button"
+                  >
                     Read More
                   </a>
                 </div>
               </div>
               <div className="ul-news-card">
                 <Image
-                  src="https://etrlcrutldimhgcd.public.blob.vercel-storage.com/B-bb12jniGEbow0DXjwVx4jDk1Uk7cLY.jpeg"
+                  src="/Images/news2.jpg"
                   alt="News 2"
                   className="ul-news-image"
                   width={300}
                   height={265}
                 />
                 <div className="ul-news-content">
-                  <p className="ul-news-date">14 May 2024</p>
+                  <p className="ul-news-date">12 April 2022</p>
                   <h3>
-                    United Lives Launches New Education Initiative for Gypsy
-                    Youth
+                    International Roma Conference Result - Romani Community
+                    Termed Indian Diaspora
                   </h3>
-                  <a href="#" className="ul-button">
+                  <a
+                    href="https://indianexpress.com/article/world/croatia-roma-conference-community-termed-indian-diaspora-7864924/"
+                    className="ul-button"
+                  >
                     Read More
                   </a>
                 </div>
               </div>
               <div className="ul-news-card">
                 <Image
-                  src="https://etrlcrutldimhgcd.public.blob.vercel-storage.com/T-4gWv2cqbv2RGtNjHwlrA2BDrbS4uE6.jpeg"
+                  src="/Images/news3.jpg"
                   alt="News 3"
                   className="ul-news-image"
                   width={300}
                   height={265}
                 />
                 <div className="ul-news-content">
-                  <p className="ul-news-date">26 April 2024</p>
+                  <p className="ul-news-date">28 June 2017</p>
                   <h3>
-                    Celebrating Diversity: Annual Gypsy Culture Festival
-                    Announced
+                    Relevant Publication - The Roma and the Subaltern
+                    Communities of India
                   </h3>
-                  <a href="#" className="ul-button">
+                  <a
+                    href="https://www.errc.org/news/the-roma-and-the-subaltern-communities-of-india"
+                    className="ul-button"
+                  >
                     Read More
                   </a>
                 </div>

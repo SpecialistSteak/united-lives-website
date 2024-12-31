@@ -9,10 +9,14 @@ export default function Blog() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [initialLoad, setInitialLoad] = useState(true);
   const [hasMore, setHasMore] = useState(true);
 
   const getBlogPosts = useCallback(async (pageNumber: number) => {
-    setLoading(true);
+    // Only set loading to true for the initial load
+    if (initialLoad) {
+      setLoading(true);
+    }
     try {
       const response = await fetch(`/api/blog?page=${pageNumber}&limit=10`);
       const data = await response.json();
@@ -28,8 +32,9 @@ export default function Blog() {
       console.error("Error fetching blog posts:", error);
     } finally {
       setLoading(false);
+      setInitialLoad(false);
     }
-  }, []);
+  }, [initialLoad]);
 
   useEffect(() => {
     getBlogPosts(page);
@@ -86,11 +91,11 @@ export default function Blog() {
       )}
       <div className="pagination-container">
         <div className="pagination-buttons">
-          <button onClick={handlePrevious} disabled={page === 1 || loading}>
+          <button onClick={handlePrevious} disabled={page === 1}>
             Previous
           </button>
           <span>Page {page}</span>
-          <button onClick={handleNext} disabled={!hasMore || loading}>
+          <button onClick={handleNext} disabled={!hasMore}>
             Next
           </button>
         </div>

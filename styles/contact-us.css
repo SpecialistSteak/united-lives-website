@@ -1,0 +1,106 @@
+/* Contact Page Container */
+.contact-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Adjust as needed */
+    padding: 40px 20px;
+    background-color: var(--background-color); /* Use your site's default background color */
+  }
+  
+  /* Form Wrapper */
+  .contact-form-wrapper {
+    background-color: var(--card-background); /* Use your site's card background color */
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Increased box shadow */
+    padding: 40px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  /* Title */
+  .contact-page-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--primary-dark); /* Dark color for title */
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  /* Form Groups */
+  .form-group {
+    margin-bottom: 25px;
+    text-align: left;
+  }
+  
+  /* Labels */
+  .form-label {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--primary-dark); /* Dark color for labels */
+    margin-bottom: 8px;
+  }
+  
+  /* Inputs */
+  .form-input,
+  .form-textarea {
+    width: 95%;
+    padding: 12px;
+    border: 1px solid var(--primary-medium); /* Added border to inputs */
+    border-radius: 5px;
+    font-size: 1em;
+    color: var(--text-muted); /* Input text color */
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-input:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: var(--accent-color); /* Highlight on focus */
+  }
+  
+  /* Textarea */
+  .form-textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+  
+  /* Submit Button */
+  .form-submit-button {
+    background-color: var(--accent-color); /* Blue button color */
+    color: var(--text-light);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .form-submit-button:hover {
+    background-color: #3570b8; /* Darker shade on hover */
+    transform: translateY(-2px); /* Hover effect */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .contact-form-wrapper {
+      padding: 30px;
+    }
+  
+    .contact-page-title {
+      font-size: 2em;
+    }
+  
+    .form-input,
+    .form-textarea {
+      font-size: 0.9em;
+    }
+  }
+
+  form-input { 
+    border-color: gray !important;
+  }

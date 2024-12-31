@@ -10,12 +10,12 @@ const TabbedSection = () => {
   const tabContent: TabContent = {
     work: {
       title: "Our Work",
-      content: "United Lives works tirelessly to advocate for the rights of Gypsy, Roma and Traveller communities. We provide legal support, education initiatives, and community outreach programs.",
+      content: "United Lives works tirelessly to advocate for the rights of the Kottapuram Roma community. We provide legal support, education initiatives, and community outreach programs.",
       url: "/our-work"
     },
     vision: {
       title: "Our Vision",
-      content: "We envision a society where Gypsy, Roma and Traveller people are treated with respect and have equal opportunities in all aspects of life.",
+      content: "We envision a society where Roma people are treated with respect and have equal opportunities in all aspects of life.",
       url: "/our-vision"
     },
     values: {

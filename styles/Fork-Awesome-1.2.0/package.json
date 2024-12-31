@@ -21,7 +21,9 @@
     "url": "https://github.com/ForkAwesome/Fork-Awesome.git"
   },
   "license": "(OFL-1.1 AND MIT)",
-  "dependencies": {},
+  "dependencies": {
+    "fork-awesome": "file:"
+  },
   "devDependencies": {
     "all-contributors-cli": "^6.16.0",
     "less": "^3.11.3",

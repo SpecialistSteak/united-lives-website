@@ -39,60 +39,43 @@ export default function BlogPostPage({
     fetchPost();
   }, [postId]);
 
-  // Function to parse and render allowed HTML tags
-  const renderContent = (content: string) => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(content, "text/html");
-
-    const renderNode = (node: Node, index: number): React.ReactNode => {
-      if (node.nodeType === Node.TEXT_NODE) {
-        return node.textContent;
+  // Function to process the content and preserve formatting
+const renderContent = (content: string) => {
+  const formattedContent = content
+    .replace(/<b>(.*?)<\/b>/g, "<strong>$1</strong>") // Replace <b> with <strong>
+    .replace(/<i>(.*?)<\/i>/g, "<em>$1</em>") // Replace <i> with <em>
+    .split("\n")
+    .map((line, index) => {
+      if (line.trim() === "") {
+        return <br key={`empty-${index}`} />; // Preserve empty lines with <br>
       }
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        const element = node as Element;
-        const children = Array.from(element.childNodes).map((child, i) =>
-          renderNode(child, i)
-        );
 
-        switch (element.tagName.toLowerCase()) {
-          case "b":
-          case "strong":
-            return (
-              <strong key={`${element.tagName}-${index}`}>{children}</strong>
-            );
-          case "i":
-          case "em":
-            return <em key={`${element.tagName}-${index}`}>{children}</em>;
-          case "a":
-            return (
-              <a
-                key={`${element.tagName}-${index}`}
-                href={element.getAttribute("href") ?? "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {children}
-              </a>
-            );
-          default:
-            return (
-              <React.Fragment key={`fragment-${index}`}>
-                {children}
-              </React.Fragment>
-            );
+      // Process each line to handle HTML tags
+      const lineWithTags = line.replace(/<\/?(strong|em|a)(?:\s[^>]*)?>/g, (match) => {
+        if (match.startsWith("</")) {
+          // Closing tag
+          return match;
+        } else {
+          // Opening tag, extract attributes
+          const tag = match.slice(1, -1); // Remove < and >
+          const tagName = tag.split(" ")[0];
+          if (tagName === "a") {
+            const hrefMatch = tag.match(/href="([^"]+)"/);
+            const href = hrefMatch ? hrefMatch[1] : "#";
+            return `<a href="${href}" target="_blank" rel="noopener noreferrer">`;
+          } else {
+            return `<${tagName}>`;
+          }
         }
-      }
-      return null;
-    };
+      });
 
-    return (
-      <>
-        {Array.from(doc.body.childNodes).map((node, index) =>
-          renderNode(node, index)
-        )}
-      </>
-    );
-  };
+      return (
+        <p key={index} dangerouslySetInnerHTML={{ __html: lineWithTags }} />
+      );
+    });
+
+  return <>{formattedContent}</>;
+};
 
   if (loading) return <LoadingComponent />;
 
