@@ -6,7 +6,8 @@ export default function LoadingComponent() {
     <div className="loading-component">
       <Image
         src="/images/loading.gif"
-        alt="Loading..."
+        alt=""
+        // alt="Loading..."
         width={50}
         height={50}
       />
