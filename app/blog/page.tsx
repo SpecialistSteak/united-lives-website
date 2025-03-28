@@ -8,15 +8,11 @@ import LoadingComponent from "@/components/LoadingComponent";
 export default function Blog() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const [initialLoad, setInitialLoad] = useState(true);
+  const [loading, setLoading] = useState(true); // Still true initially
   const [hasMore, setHasMore] = useState(true);
 
   const getBlogPosts = useCallback(async (pageNumber: number) => {
-    // Only set loading to true for the initial load
-    if (initialLoad) {
-      setLoading(true);
-    }
+    setLoading(true); // Set loading true at the start of every fetch
     try {
       const response = await fetch(`/api/blog?page=${pageNumber}&limit=10`);
       const data = await response.json();
@@ -26,19 +22,21 @@ export default function Blog() {
         createdAt: post.createdAt ? new Date(post.createdAt) : new Date(),
       }));
 
+      // If page is 1, replace posts; otherwise, append (or handle as needed)
+      // For now, we'll stick to replacing as per original logic for pagination
       setBlogPosts(newPosts);
       setHasMore(newPosts.length === 10);
     } catch (error) {
       console.error("Error fetching blog posts:", error);
+      setHasMore(false); // Assume no more data on error
     } finally {
-      setLoading(false);
-      setInitialLoad(false);
+      setLoading(false); // Set loading false when fetch ends (success or error)
     }
-  }, [initialLoad]);
+  }, []); // Remove initialLoad dependency
 
   useEffect(() => {
     getBlogPosts(page);
-  }, [getBlogPosts, page]);
+  }, [getBlogPosts, page]); // getBlogPosts reference is now stable
 
   const handlePrevious = () => {
     if (page > 1) {

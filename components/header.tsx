@@ -127,7 +127,6 @@ const Header = () => {
           href: "#",
           children: [
             { label: "Our Team", href: "/blog/19" },
-            { label: "Frequently Asked Questions", href: "/faq" },
             { label: "Support Us", href: "/contact" },
             { label: "Volunteer with Us", href: "/contact" },
           ],
@@ -185,7 +184,8 @@ const Header = () => {
           ],
         },
       ],
-    }
+    },
+    { label: "Frequently Asked Questions", href: "/faq" }
   ];
 
   return (
