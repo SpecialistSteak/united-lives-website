@@ -82,7 +82,7 @@ const renderContent = (content: string) => {
   if (error)
     return (
       <div className="error-container">
-        <Image src="/images/error.gif" alt="Error" width={50} height={50} />
+        <Image src="/Images/error.gif" alt="Error" width={50} height={50} />
         <p>Error loading post: {error}</p>
       </div>
     );
@@ -90,7 +90,7 @@ const renderContent = (content: string) => {
   if (!post)
     return (
       <div className="no-post-container">
-        <Image src="/images/no-post.gif" alt="No Post" width={50} height={50} />
+        <Image src="/Images/no-post.gif" alt="No Post" width={50} height={50} />
         <p>No post found.</p>
       </div>
     );

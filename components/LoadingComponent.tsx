@@ -5,7 +5,7 @@ export default function LoadingComponent() {
   return (
     <div className="loading-component">
       <Image
-        src="/images/loading.gif"
+        src="/Images/loading.webp"
         alt=""
         // alt="Loading..."
         width={50}

@@ -85,7 +85,7 @@ export default function Blog() {
               </p>
             </div>
           ))}
-          {blogPosts.length === 0 && <p>No blog posts found.</p>} {/* Add this line */}
+          {blogPosts.length === 0 && <p>No blog posts found.</p>}
         </div>
       )}
       <div className="pagination-container">
