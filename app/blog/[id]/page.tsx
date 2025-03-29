@@ -39,25 +39,24 @@ export default function BlogPostPage({
     fetchPost();
   }, [postId]);
 
-  // Function to process the content and preserve formatting
 const renderContent = (content: string) => {
-  const formattedContent = content
+  const processedContent = content
     .replace(/<b>(.*?)<\/b>/g, "<strong>$1</strong>") // Replace <b> with <strong>
-    .replace(/<i>(.*?)<\/i>/g, "<em>$1</em>") // Replace <i> with <em>
-    .split("\n")
-    .map((line, index) => {
-      if (line.trim() === "") {
-        return <br key={`empty-${index}`} />; // Preserve empty lines with <br>
-      }
-
-      // Process each line to handle HTML tags
-      const lineWithTags = line.replace(/<\/?(strong|em|a)(?:\s[^>]*)?>/g, (match) => {
+    .replace(/<i>(.*?)<\/i>/g, "<em>$1</em>"); // Replace <i> with <em>
+  
+  const paragraphs = processedContent.split("\n").map((line, index) => {
+    if (line.trim() === "") {
+      return <br key={`empty-${index}`} />;
+    }
+    
+    const lineWithTags = line.replace(
+      // process HTML tags in the line (for links, etc.)
+      /<\/?(strong|em|a)(?:\s[^>]*)?>/g,
+      (match) => {
         if (match.startsWith("</")) {
-          // Closing tag
           return match;
         } else {
-          // Opening tag, extract attributes
-          const tag = match.slice(1, -1); // Remove < and >
+          const tag = match.slice(1, -1);
           const tagName = tag.split(" ")[0];
           if (tagName === "a") {
             const hrefMatch = tag.match(/href="([^"]+)"/);
@@ -67,18 +66,19 @@ const renderContent = (content: string) => {
             return `<${tagName}>`;
           }
         }
-      });
-
-      return (
-        <p key={index} dangerouslySetInnerHTML={{ __html: lineWithTags }} />
-      );
-    });
-
-  return <>{formattedContent}</>;
+      }
+    );
+    
+    return (
+      <p key={index} dangerouslySetInnerHTML={{ __html: lineWithTags }} />
+    );
+  });
+  
+  return <>{paragraphs}</>;
 };
 
   if (loading) return <LoadingComponent />;
-
+  
   if (error)
     return (
       <div className="error-container">
@@ -86,7 +86,7 @@ const renderContent = (content: string) => {
         <p>Error loading post: {error}</p>
       </div>
     );
-
+    
   if (!post)
     return (
       <div className="no-post-container">
@@ -98,18 +98,17 @@ const renderContent = (content: string) => {
   return (
     <div className="post-container">
       <h1 className="post-title">{post.title}</h1>
-      <div className="info-container">
+      <div className="post-metadata">
+        <div className="published-date">
+          Published: {post.createdAt.toLocaleDateString()}
+        </div>
         <div className="tags-container">
-          <strong className="tags-label">Tags:</strong>
+          <span className="tags-label">Tags:</span>
           {post.tags.map((tag) => (
             <span key={tag} className="tag">
               {tag}
             </span>
           ))}
-        </div>
-        <div className="published-container">
-          <strong className="published-label">Published:</strong>{" "}
-          {post.createdAt.toLocaleDateString()}
         </div>
       </div>
       <hr className="separator" />

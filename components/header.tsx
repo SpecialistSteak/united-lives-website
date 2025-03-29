@@ -185,7 +185,7 @@ const Header = () => {
         },
       ],
     },
-    { label: "Frequently Asked Questions", href: "/faq" }
+    { label: "FAQ", href: "/faq" }
   ];
 
   return (
