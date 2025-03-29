@@ -116,7 +116,7 @@ const Footer = () => {
           >
             <div className="d-flex justify-content-between align-items-center mb-0">
               <small className="text-white-50">
-                United Lives © 2024. All Rights Reserved.
+                United Lives © 2025. All Rights Reserved.
               </small>
               <small className="text-white-50">
                 Website coded and designed by Luke Merletti
