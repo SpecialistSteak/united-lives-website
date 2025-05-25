@@ -34,7 +34,7 @@ const OurWorkPage = () => {
               the Roma people through various initiatives, including cultural
               events, educational programs, and documentation efforts.
             </p>
-            <a href="#" className="project-link">
+            <a href="/blog" className="project-link">
               Learn More
             </a>
           </div>
@@ -56,7 +56,7 @@ const OurWorkPage = () => {
               improve the lives of Roma communities, focusing on access to
               education, healthcare, housing, and employment opportunities.
             </p>
-            <a href="#" className="project-link">
+            <a href="/blog" className="project-link">
               Learn More
             </a>
           </div>
@@ -78,7 +78,7 @@ const OurWorkPage = () => {
               communities, challenging discriminatory practices, defending their
               rights, and pursuing justice through legal fighting.
             </p>
-            <a href="#" className="project-link">
+            <a href="/blog" className="project-link">
               Learn More
             </a>
           </div>
@@ -100,7 +100,7 @@ const OurWorkPage = () => {
               to provide education for Roma children and
               adults, helping them build a brighter future.
             </p>
-            <a href="#" className="project-link">
+            <a href="/blog" className="project-link">
               Learn More
             </a>
           </div>
@@ -122,7 +122,7 @@ const OurWorkPage = () => {
               communities by providing access to healthcare services, health
               education, and promoting healthy living.
             </p>
-            <a href="#" className="project-link">
+            <a href="/blog" className="project-link">
               Learn More
             </a>
           </div>
@@ -144,7 +144,7 @@ const OurWorkPage = () => {
               training programs, product making courses, and shop venues to
               foster financial independence and sustainability.
             </p>
-            <a href="#" className="project-link">
+            <a href="/blog" className="project-link">
               Learn More
             </a>
           </div>
@@ -166,7 +166,7 @@ const OurWorkPage = () => {
               opportunities for leadership development, skills training, and
               participation in community-building activities.
             </p>
-            <a href="#" className="project-link">
+            <a href="/blog" className="project-link">
               Learn More
             </a>
           </div>
@@ -188,7 +188,7 @@ const OurWorkPage = () => {
               communities, advocating for access to safe, adequate, and
               affordable housing, clean water, and sanitation.
             </p>
-            <a href="#" className="project-link">
+            <a href="/blog" className="project-link">
               Learn More
             </a>
           </div>

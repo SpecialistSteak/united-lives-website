@@ -164,28 +164,22 @@ const Header = () => {
         <nav>
           <ul>
             <li>
-              <a href="#" className="navbar-href">
+              <a href="/contact" className="navbar-href">
                 Contact Us
               </a>
             </li>
             <li>
-              <a href="#" className="navbar-href">
+              <a href="/contact" className="navbar-href">
                 Support Us
               </a>
             </li>
             <li>
-              <a href="#" className="navbar-href">
+              <a href="/donate" className="navbar-href">
                 Donate
               </a>
             </li>
           </ul>
         </nav>
-        <div className="social-icons">
-          <a href="#" className="navbar-href icon-facebook"></a>
-          <a href="#" className="navbar-href icon-twitter"></a>
-          <a href="#" className="navbar-href icon-instagram"></a>
-          <a href="#" className="navbar-href icon-youtube"></a>
-        </div>
       </div>
       <div className="main-bar">
         <div className="logo">

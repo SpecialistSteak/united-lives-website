@@ -17,28 +17,19 @@ const Footer = () => {
             <p>Learn more about us and our work:</p>
             <ul>
               <li>
-                <a href="#">Our Story</a>
+                <a href="/blog/19">Our Team</a>
               </li>
               <li>
-                <a href="#">Our Team</a>
+                <a href="/our-work">What We Do</a>
               </li>
               <li>
-                <a href="#">What We Do</a>
-              </li>
-              <li>
-                <a href="#">Our Impact</a>
+                <a href="/blog/14">Our Vision</a>
               </li>
             </ul>
             <p>Connect with us:</p>
             <p>
-              <a href="#">
-                <i className="fa fa-facebook-square mr-1"></i>
-              </a>
-              <a href="#">
-                <i className="fa fa-instagram-square"></i>
-              </a>
-              <a href="#">
-                <i className="fa fa-youtube-square ml-1"></i>
+              <a href="https://wa.me/916381310381">
+                <i className="fa fa-whatsapp mr-1"></i>
               </a>
             </p>
           </div>
@@ -46,25 +37,25 @@ const Footer = () => {
             <h4 className="mt-lg-0 mt-sm-3">Useful Links</h4>
             <ul className="m-0 p-0">
               <li>
-                <a href="#">Home</a>
+                <a href="/">Home</a>
               </li>
               <li>
-                <a href="#">About Us</a>
+                <a href="/blog/19">About Us</a>
               </li>
               <li>
-                <a href="#">Projects</a>
+                <a href="/our-work">Projects</a>
               </li>
               <li>
-                <a href="#">Gallery</a>
+                <a href="/gallery">Gallery</a>
               </li>
               <li>
-                <a href="#">News</a>
+                <a href="/blog">News</a>
               </li>
               <li>
-                <a href="#">Donate</a>
+                <a href="/donate">Donate</a>
               </li>
               <li>
-                <a href="#">Contacts</a>
+                <a href="/contact">Contacts</a>
               </li>
             </ul>
           </div>
@@ -75,7 +66,7 @@ const Footer = () => {
               our cause.
             </p>
             <p>
-              Volunteer: <a href="#">Sign Up</a>
+              Volunteer: <a href="/contact">Sign Up</a>
             </p>
             <h4 className="mt-4">Contact Us</h4>
             <p>
@@ -92,7 +83,7 @@ const Footer = () => {
             </p>
             <h4 className="mt-4">Donate</h4>
             <p>
-              Donate: <a href="#">Give Now</a>
+              Donate: <a href="/donate">Give Now</a>
             </p>
           </div>
         </div>
