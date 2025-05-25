@@ -149,40 +149,10 @@ const Header = () => {
       label: "Campaigns",
       href: "#",
       children: [
-        { label: "Education for All", href: "#" },
-        { label: "Clean Water Initiative", href: "#" },
-        { label: "Women Empowerment", href: "#" },
-        { label: "Child Welfare", href: "#" },
-      ],
-    },
-    {
-      label: "Resources",
-      href: "#",
-      children: [
-        { label: "Reports and Publications", href: "#" },
-        { label: "Educational Resources", href: "#" },
-      ],
-    },
-    {
-      label: "Communities",
-      href: "#",
-      children: [
-        {
-          label: "Community Resources",
-          href: "#",
-          children: [
-            { label: "Kotupuram Colony", href: "#" },
-            { label: "Cultural Heritage", href: "#" },
-          ],
-        },
-        {
-          label: "Language Resources",
-          href: "#",
-          children: [
-            { label: "Tamil", href: "#" },
-            { label: "Community Languages", href: "#" },
-          ],
-        },
+        { label: "Education for All", href: "/blog/18" },
+        { label: "Clean Water Initiative", href: "/blog/17" },
+        { label: "Women Empowerment", href: "/blog/16" },
+        { label: "Child Welfare", href: "/blog/15" },
       ],
     },
     { label: "FAQ", href: "/faq" }
