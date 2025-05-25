@@ -55,7 +55,7 @@
 }
 
 .form-submit-button.whatsapp-link-as-button { 
-  background-color: var(--accent-color); 
+  background-color: var(--accent-color-dark, #3570b8);
   color: var(--text-light, #fff) !important;
   padding: 12px 25px;
   border: none;
@@ -70,7 +70,6 @@
 }
 
 .form-submit-button.whatsapp-link-as-button:hover {
-  background-color: var(--accent-color-dark, #3570b8);
   transform: translateY(-2px);
 }
 
