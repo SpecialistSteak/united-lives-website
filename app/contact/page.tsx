@@ -1,34 +1,50 @@
 import React from 'react';
-import '../../styles/contact-us.css'; // Make sure the path is correct
+import Image from 'next/image';
+import '../../styles/contact-us.css';
 
 const ContactPage: React.FC = () => {
+  const whatsappNumber = "+91 6381 310 381";
+  const whatsappLink = "https://wa.me/916381310381";
+
   return (
     <div className="contact-page-container">
-      <div className="contact-form-wrapper">
-        <h1 className="contact-page-title">Contact Us</h1>
-        <form className="contact-form">
-          <div className="form-group">
-            <label htmlFor="name" className="form-label">
-              Name
-            </label>
-            <input type="text" id="name" name="name" className="form-input" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <input type="email" id="email" name="email" className="form-input" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="message" className="form-label">
-              Message
-            </label>
-            <textarea id="message" name="message" className="form-textarea" required></textarea>
-          </div>
-          <button type="submit" className="form-submit-button">
-            Send
-          </button>
-        </form>
+      {}
+      <div className="contact-form-wrapper"> {}
+        {}
+        <h1 className="contact-page-title">Contact United Lives</h1>
+
+        <p className="whatsapp-instruction"> {}
+          The most effective way to reach us is via WhatsApp.
+        </p>
+        <p className="whatsapp-instruction-scan"> {}
+          Scan the QR code below or click the button to start a chat.
+        </p>
+
+        {}
+        <div className="qr-code-display-wrapper">
+          <Image
+            src="/Images/contactqr.png" 
+            alt={`WhatsApp United Lives at ${whatsappNumber}`}
+            width={250}
+            height={250}
+            priority
+            className="qr-code-image" 
+          />
+        </div>
+
+        {}
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="form-submit-button whatsapp-link-as-button" 
+        >
+          Chat on WhatsApp
+        </a>
+
+        <p className="whatsapp-direct-number-display"> {}
+          Or add us directly: {whatsappNumber}
+        </p>
       </div>
     </div>
   );

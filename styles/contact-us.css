@@ -1,106 +1,104 @@
-/* Contact Page Container */
 .contact-page-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 80vh; /* Adjust as needed */
-    padding: 40px 20px;
-    background-color: var(--background-color); /* Use your site's default background color */
-  }
-  
-  /* Form Wrapper */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* Adjust as needed */
+  padding: 40px 20px;
+  background-color: var(--background-color); /* Use your site's default background color */
+}
+
+/* Form Wrapper (Re-purposed for QR Content Box) - From your CSS */
+.contact-form-wrapper {
+  background-color: var(--card-background); /* Use your site's card background color */
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Increased box shadow */
+  padding: 40px;
+  width: 100%;
+  max-width: 500px; /* Adjusted max-width for a more focused QR display */
+  text-align: center;
+}
+
+/* Title - From your CSS */
+.contact-page-title {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: var(--primary-dark); /* Dark color for title */
+  margin-bottom: 20px; /* Adjusted margin */
+  text-align: center;
+}
+
+/* NEW STYLES for WhatsApp specific content */
+.whatsapp-instruction {
+  font-size: 1.2em; /* Slightly larger instruction */
+  color: var(--primary-dark); /* Consistent with labels */
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.whatsapp-instruction-scan {
+  font-size: 1em;
+  color: var(--text-muted); /* Softer color for secondary instruction */
+  margin-bottom: 25px;
+}
+
+.qr-code-display-wrapper {
+  margin-bottom: 30px;
+  display: inline-block; /* To allow border/padding directly on this wrapper */
+  padding: 10px; /* Padding around the QR image inside the wrapper */
+  border: 1px solid var(--primary-medium, #ccc); /* Border around QR, fallback color */
+  border-radius: 8px;
+  background-color: #fff; /* Ensure QR background is white if image is transparent */
+}
+
+.qr-code-image {
+  display: block; /* Ensure it behaves as a block element within its wrapper */
+}
+
+.form-submit-button.whatsapp-link-as-button { 
+  background-color: var(--accent-color); 
+  color: var(--text-light, #fff) !important;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-decoration: none; 
+  display: inline-block; 
+  margin-bottom: 20px; 
+}
+
+.form-submit-button.whatsapp-link-as-button:hover {
+  background-color: var(--accent-color-dark, #3570b8);
+  transform: translateY(-2px);
+}
+
+.whatsapp-direct-number-display {
+  font-size: 1em;
+  color: var(--primary-dark);
+  margin-top: 15px;
+}
+
+
+@media (max-width: 768px) {
   .contact-form-wrapper {
-    background-color: var(--card-background); /* Use your site's card background color */
-    border-radius: 10px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Increased box shadow */
-    padding: 40px;
-    width: 100%;
-    max-width: 600px;
-    text-align: center;
-  }
-  
-  /* Title */
-  .contact-page-title {
-    font-size: 2.5em;
-    font-weight: 700;
-    color: var(--primary-dark); /* Dark color for title */
-    margin-bottom: 30px;
-    text-align: center;
-  }
-  
-  /* Form Groups */
-  .form-group {
-    margin-bottom: 25px;
-    text-align: left;
-  }
-  
-  /* Labels */
-  .form-label {
-    display: block;
-    font-size: 1.1em;
-    font-weight: 600;
-    color: var(--primary-dark); /* Dark color for labels */
-    margin-bottom: 8px;
-  }
-  
-  /* Inputs */
-  .form-input,
-  .form-textarea {
-    width: 95%;
-    padding: 12px;
-    border: 1px solid var(--primary-medium); /* Added border to inputs */
-    border-radius: 5px;
-    font-size: 1em;
-    color: var(--text-muted); /* Input text color */
-    transition: border-color 0.3s ease;
-  }
-  
-  .form-input:focus,
-  .form-textarea:focus {
-    outline: none;
-    border-color: var(--accent-color); /* Highlight on focus */
-  }
-  
-  /* Textarea */
-  .form-textarea {
-    min-height: 150px;
-    resize: vertical;
-  }
-  
-  /* Submit Button */
-  .form-submit-button {
-    background-color: var(--accent-color); /* Blue button color */
-    color: var(--text-light);
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .form-submit-button:hover {
-    background-color: #3570b8; /* Darker shade on hover */
-    transform: translateY(-2px); /* Hover effect */
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .contact-form-wrapper {
-      padding: 30px;
-    }
-  
-    .contact-page-title {
-      font-size: 2em;
-    }
-  
-    .form-input,
-    .form-textarea {
-      font-size: 0.9em;
-    }
+    padding: 30px 20px; 
   }
 
-  form-input { 
-    border-color: gray !important;
+  .contact-page-title {
+    font-size: 2em;
   }
+
+  .whatsapp-instruction {
+    font-size: 1.1em;
+  }
+
+  .qr-code-display-wrapper {
+    padding: 8px;
+  }
+  .form-submit-button.whatsapp-link-as-button {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+}
