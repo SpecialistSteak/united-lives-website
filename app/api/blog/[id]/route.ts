@@ -1,5 +1,7 @@
 // app/api/blog/[id]/route.ts
 
+export const dynamic = 'force-dynamic'; // should stop caching 
+
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 import { BlogPost } from "../../../../types/blog-post";
