@@ -7,6 +7,10 @@ import TabbedSection from "@/components/tabbed-section";
 import SubNavBanner from "@/components/sub-nav-banner";
 
 export default function Home() {
+  function submitEmail(): React.FormEventHandler<HTMLButtonElement> | undefined {
+    return;
+  }
+
   return (
     <>
       <SubNavBanner />
@@ -212,7 +216,7 @@ export default function Home() {
                 placeholder="Your email address"
                 className="ul-newsletter-input"
               />
-              <button type="submit" className="ul-button ul-button-primary">
+              <button type="submit" className="ul-button ul-button-primary" onSubmit={submitEmail()}>
                 Subscribe
               </button>
             </form>
