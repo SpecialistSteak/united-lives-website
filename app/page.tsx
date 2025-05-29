@@ -7,17 +7,6 @@ import TabbedSection from "@/components/tabbed-section";
 import SubNavBanner from "@/components/sub-nav-banner";
 
 export default function Home() {
-  const [showPopup, setShowPopup] = useState(false);
-
-  const handleDonateClick = () => {
-    setShowPopup(true);
-
-    // Automatically hide the popup after 3 seconds (adjust as needed)
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 3000);
-  };
-
   return (
     <>
       <SubNavBanner />
@@ -32,37 +21,14 @@ export default function Home() {
               people, securing their legal rights, and fostering equality for
               the Roma people.
             </p>
-            <button
-              onClick={handleDonateClick}
+            <a
+              href="/donate"
               className="ul-button ul-button-primary"
             >
               Donate Now
-            </button>
+            </a>
           </div>
         </section>
-
-        {/* Popup Message */}
-        {showPopup && (
-          <div
-            style={{
-              position: "fixed",
-              bottom: "20px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              backgroundColor: "#fff", // Solid white background
-              padding: "15px 25px",
-              borderRadius: "5px",
-              boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
-              zIndex: 1000,
-              textAlign: "center",
-            }}
-          >
-            <p style={{ margin: 0, color: "black" }}>
-              We are currently working out a bank account with the Indian
-              government. Please contact us to donate in the meantime.
-            </p>
-          </div>
-        )}
 
         <section className="ul-mission">
           <div className="ul-container">

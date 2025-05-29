@@ -14,10 +14,10 @@ const DonatePage: React.FC = () => {
         <h1 className="contact-page-title">Contact United Lives</h1>
 
         <p className="whatsapp-instruction"> {}
-          The most effective way to reach us is via WhatsApp.
+          Currently, we are accepting donations, but due to logistical issues, we have not been able to set up a donation page. Please contact us if you are interested in donating at the link below or by scanning the QR code.
         </p>
         <p className="whatsapp-instruction-scan"> {}
-          Scan the QR code below or click the button to start a chat.
+          Scan the QR code below or click the button to contact us.
         </p>
 
         {}
